@@ -61,7 +61,8 @@ a {
   transition: color var(--transition);
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -101,7 +102,7 @@ button {
   height: calc(100vh - var(--header-height));
   background: #faf7f2;
   border-right: 1px solid #e0d9cf;
-  box-shadow: inset -1px 0 0 rgba(0,0,0,0.03);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.03);
   overflow-y: auto;
   z-index: 900;
   padding-bottom: 20px;
@@ -109,7 +110,7 @@ button {
 
 .sidebar-title {
   padding: 18px 20px 12px;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--color-text);
   border-bottom: 1px solid #e0d9cf;
@@ -243,11 +244,25 @@ button {
 }
 
 @keyframes navBounce {
-  0%   { transform: translateY(0); }
-  30%  { transform: translateY(-4px); }
-  50%  { transform: translateY(0); }
-  70%  { transform: translateY(-2px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-4px);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+
+  70% {
+    transform: translateY(-2px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 /* 搜索 */
@@ -531,8 +546,13 @@ button {
 }
 
 /* 不同卡片不同色调的占位背景 — 2项交替 */
-.box .content ul li:nth-child(odd) a img  { background: linear-gradient(135deg, #e0f2fe, #bae6fd, #7dd3fc); }
-.box .content ul li:nth-child(even) a img { background: linear-gradient(135deg, #fce7f3, #fbcfe8, #f9a8d4); }
+.box .content ul li:nth-child(odd) a img {
+  background: linear-gradient(135deg, #e0f2fe, #bae6fd, #7dd3fc);
+}
+
+.box .content ul li:nth-child(even) a img {
+  background: linear-gradient(135deg, #fce7f3, #fbcfe8, #f9a8d4);
+}
 
 .box .content ul li h3 {
   font-size: 14px;
@@ -555,6 +575,169 @@ button {
 .box .content ul li p span {
   color: var(--color-accent);
   font-weight: 600;
+}
+
+/* ============================================
+   软件工具下载 — 可展开详情面板
+   ============================================ */
+/* 软件工具 — 一行一个 */
+.box .content .tool-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.tool-item {
+  position: relative;
+  display: flex;
+  background: var(--color-bg-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: visible;
+  transition: box-shadow 0.3s ease;
+}
+
+.tool-item.active {
+  box-shadow: var(--shadow-md);
+  z-index: 2;
+}
+
+/* 左侧卡片 */
+.tool-card {
+  min-width: 160px;
+  max-width: 160px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+  overflow: hidden;
+}
+
+.tool-card:hover {
+  background: var(--color-primary-light);
+}
+
+.tool-card a {
+  display: block;
+}
+
+.tool-card a img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+
+.tool-card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 12px 2px;
+  color: var(--color-text);
+}
+
+.tool-card p {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  padding: 0 12px 12px;
+}
+
+/* 右侧详情面板 */
+.tool-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease, padding 0.35s ease;
+  padding: 0;
+  border-left: 1px solid transparent;
+}
+
+.tool-item.active .tool-detail {
+  max-width: 560px;
+  opacity: 1;
+  padding: 18px 22px;
+  border-left-color: var(--color-border);
+}
+
+.tool-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  flex: 1;
+}
+
+.tool-section {
+  margin-bottom: 0;
+}
+
+.tool-section:last-child {
+  margin-bottom: 0;
+}
+
+.tool-section h4 {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-light);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tool-section p {
+  font-size: 13px;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* 下载按钮 */
+.tool-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 28px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  align-self: flex-end;
+  margin-top: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-download::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.tool-download:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(26, 115, 232, 0.4);
+}
+
+.tool-download:hover::after {
+  opacity: 1;
+}
+
+/* 交替占位背景 */
+.tool-item:nth-child(odd) .tool-card a img {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0, #6ee7b7);
+}
+
+.tool-item:nth-child(even) .tool-card a img {
+  background: linear-gradient(135deg, #fef3c7, #fde68a, #fcd34d);
 }
 
 /* ============================================
@@ -588,7 +771,7 @@ button {
   margin-bottom: 16px;
 }
 
-.footer .left > a {
+.footer .left>a {
   display: inline-block;
   padding: 8px 20px;
   border: 1px solid var(--color-footer-text);
@@ -598,7 +781,7 @@ button {
   transition: all var(--transition);
 }
 
-.footer .left > a:hover {
+.footer .left>a:hover {
   border-color: #fff;
   color: #fff;
 }
@@ -694,6 +877,10 @@ button {
   .box .content ul {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
+  }
+
+  .box .content .tool-list {
+    grid-template-columns: 1fr;
   }
 
   .banner .wrapper {
@@ -807,6 +994,30 @@ button {
 
   .goods .modify {
     margin-left: 0;
+  }
+
+  .tool-item {
+    flex-direction: column;
+  }
+
+  .tool-card {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .tool-item.active .tool-detail {
+    max-width: 100%;
+    padding: 14px 16px;
+  }
+
+  .tool-info {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .tool-download {
+    align-self: stretch;
+    text-align: center;
   }
 }
 

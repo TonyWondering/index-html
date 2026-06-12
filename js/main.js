@@ -40,7 +40,10 @@ document.addEventListener('DOMContentLoaded', function () {
   var sidebarLinks = document.querySelectorAll('.sidebar-nav li a');
   var sectionIds = [];
   sidebarLinks.forEach(function (link) {
-    sectionIds.push(link.getAttribute('href').substring(1));
+    var href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      sectionIds.push(href.substring(1));
+    }
   });
 
   function updateActiveLink() {
@@ -85,6 +88,29 @@ document.addEventListener('DOMContentLoaded', function () {
     if (href && href.indexOf('bilibili.com') !== -1) {
       link.setAttribute('href', href + (href.indexOf('?') === -1 ? '?' : '&') + 'muted=1');
     }
+  });
+
+  // ========== 软件工具卡片：点击展开详情面板 ==========
+  var toolCards = document.querySelectorAll('.tool-card');
+  toolCards.forEach(function (card) {
+    card.addEventListener('click', function () {
+      var item = card.closest('.tool-item');
+      if (!item) return;
+
+      // 如果已打开，关闭它
+      if (item.classList.contains('active')) {
+        item.classList.remove('active');
+        return;
+      }
+
+      // 关闭其他已打开的
+      document.querySelectorAll('.tool-item.active').forEach(function (open) {
+        open.classList.remove('active');
+      });
+
+      // 打开当前
+      item.classList.add('active');
+    });
   });
 
   // ========== 返回顶部按钮 ==========
