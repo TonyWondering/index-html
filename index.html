@@ -23,6 +23,11 @@
             <div class="header-right">
                 <div class="nav">
                     <ul>
+                        <li class="theme-toggle" id="themeToggle">
+                            <a href="javascript:void(0)" title="切换主题">
+                                <span class="theme-icon">☀️</span>
+                            </a>
+                        </li>
                         <li class="has-dropdown">
                             <a href="#">前端开发 <span class="arrow">▾</span></a>
                             <ul class="dropdown">
@@ -593,61 +598,26 @@
     </div><!-- /.main-content -->
 
     <script src="./js/main.js"></script>
-    <div id="masonry-root"></div>
-    <script type="text/babel">
-      function Masonry() {
-        const items = [
-          { id: 1, title: 'Item 1', height: 100 },
-          { id: 2, title: 'Item 2', height: 150 },
-          { id: 3, title: 'Item 3', height: 120 },
-          { id: 4, title: 'Item 4', height: 180 },
-          { id: 5, title: 'Item 5', height: 90 },
-          { id: 6, title: 'Item 6', height: 160 },
-        ];
-
-        return (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-            gap: '16px',
-            padding: '20px'
-          }}>
-            {items.map(item => (
-              <div key={item.id} style={{
-                background: 'rgba(255,255,255,0.1)',
-                borderRadius: '8px',
-                padding: '16px',
-                height: item.height,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white'
-              }}>
-                {item.title}
-              </div>
-            ))}
-          </div>
-        );
-      }
-
-      ReactDOM.createRoot(document.getElementById('masonry-root')).render(<Masonry />);
-    </script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         gsap.registerPlugin(ScrollTrigger);
-        const cards = document.querySelectorAll('.box .content ul:not(.tool-list) li');
-        cards.forEach(card => {
-          gsap.from(card, {
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 80%',
-              toggleActions: 'play none none none'
-            },
-            opacity: 0,
-            y: 50,
-            duration: 0.8,
-            ease: 'power2.out',
-            clearProps: "all"
+        const boxes = document.querySelectorAll('.box');
+        boxes.forEach(box => {
+          const cards = box.querySelectorAll('.content ul li');
+          cards.forEach((card, index) => {
+            gsap.from(card, {
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+              },
+              opacity: 0,
+              y: 50,
+              duration: 0.8,
+              delay: index * 0.3,
+              ease: 'power2.out',
+              clearProps: "all"
+            });
           });
         });
       });

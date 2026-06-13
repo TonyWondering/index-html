@@ -9,7 +9,7 @@
   --color-primary-light: #e8f0fe;
   --color-accent: #ff6b35;
   --color-accent-hover: #e55a2b;
-  --color-bg: #f5f7fa;
+  --color-bg: #ffffff;
   --color-bg-white: #ffffff;
   --color-text: #333333;
   --color-text-light: #666666;
@@ -33,6 +33,27 @@
   --transition: 0.2s ease;
 }
 
+/* 暗色主题 */
+[data-theme="dark"] {
+  --color-primary: #60a5fa;
+  --color-primary-dark: #3b82f6;
+  --color-primary-light: #1e3a5f;
+  --color-accent: #f97316;
+  --color-accent-hover: #ea580c;
+  --color-bg: #0f172a;
+  --color-bg-white: #1e293b;
+  --color-text: #ffffff;
+  --color-text-light: #94a3b8;
+  --color-text-muted: #64748b;
+  --color-border: #334155;
+  --color-footer-bg: #0f172a;
+  --color-footer-text: #94a3b8;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
 /* --- Reset & Base --- */
 *,
 *::before,
@@ -50,8 +71,7 @@ body {
   font-family: var(--font-family);
   font-size: 14px;
   color: var(--color-text);
-  background: linear-gradient(135deg, #1a0533 0%, #000000 100%);
-  background-attachment: fixed;
+  background-color: var(--color-bg);
   line-height: 1.6;
   min-width: 320px;
 }
@@ -101,8 +121,8 @@ button {
   left: 0;
   width: 220px;
   height: calc(100vh - var(--header-height));
-  background: #faf7f2;
-  border-right: 1px solid #e0d9cf;
+  background: var(--color-bg);
+  border-right: 1px solid var(--color-border);
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.03);
   overflow-y: auto;
   z-index: 900;
@@ -114,7 +134,7 @@ button {
   font-size: 18px;
   font-weight: 700;
   color: var(--color-text);
-  border-bottom: 1px solid #e0d9cf;
+  border-bottom: 1px solid var(--color-border);
   margin-bottom: 0;
 }
 
@@ -135,7 +155,7 @@ button {
   color: var(--color-text);
   text-decoration: none;
   border-left: 3px solid transparent;
-  border-bottom: 1px solid #ece5d8;
+  border-bottom: 1px solid var(--color-border);
   transition: all 0.2s ease;
 }
 
@@ -146,9 +166,9 @@ button {
 .sidebar-nav li a:hover,
 .sidebar-nav li a.active {
   color: #fff;
-  background: #5a9cf0;
-  border-left-color: #3b7fd9;
-  border-bottom-color: #5a9cf0;
+  background: var(--color-primary);
+  border-left-color: var(--color-primary-dark);
+  border-bottom-color: var(--color-primary);
   font-size: 15px;
   font-weight: 600;
 }
@@ -181,6 +201,8 @@ button {
   justify-content: space-between;
   height: var(--header-height);
   transition: height 0.35s ease;
+  width: 100%;
+  padding: 0 20px;
 }
 
 .header.compact .header-inner {
@@ -233,6 +255,20 @@ button {
   transition: background var(--transition), color var(--transition), font-size 0.35s ease;
 }
 
+.header .nav .theme-toggle a {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+}
+
+.header .nav .theme-toggle .theme-icon {
+  font-style: normal;
+  line-height: 1;
+  margin-top: 2px;
+}
+
 /* 下拉箭头 */
 .header .nav .arrow {
   font-size: 14px;
@@ -256,7 +292,7 @@ button {
   left: 0;
   display: block;
   min-width: 140px;
-  background: #e8f4fd;
+  background: var(--color-bg-white);
   border-radius: 8px;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
   padding: 6px 0;
@@ -311,7 +347,7 @@ button {
   }
 
   30% {
-    transform: translateY(-4px);
+  transform: translateY(-8px);
   }
 
   50% {
@@ -345,7 +381,7 @@ button {
 }
 
 .header .search input {
-  width: 200px;
+  width: 280px;
   padding: 8px 14px;
   border: none;
   background: transparent;
@@ -373,6 +409,7 @@ button {
   gap: 8px;
   cursor: pointer;
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 .header .user img {
@@ -585,6 +622,11 @@ button {
   gap: 20px;
 }
 
+/* Python课程三列布局 */
+#python .content ul {
+  grid-template-columns: repeat(3, 280px);
+}
+
 .box .content ul li {
   background: var(--color-bg-white);
   border-radius: var(--radius-md);
@@ -594,8 +636,8 @@ button {
 }
 
 .box .content ul li:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
 }
 
 .box .content ul li a img {

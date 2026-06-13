@@ -5,6 +5,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var HEADER_OFFSET = 60;
 
+  // ========== 主题切换 ==========
+  var themeToggle = document.getElementById('themeToggle');
+  var themeIcon = themeToggle ? themeToggle.querySelector('.theme-icon') : null;
+  var currentTheme = localStorage.getItem('theme') || 'light';
+
+  function applyTheme(theme) {
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    if (themeIcon) {
+      themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    }
+  }
+
+  applyTheme(currentTheme);
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function() {
+      var newTheme = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+    });
+  }
+
   // ========== 搜索功能 ==========
   var searchInput = document.querySelector('.search input');
   var searchBtn = document.querySelector('.search button');
