@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ========== 锚点平滑滚动（精品推荐 + 侧边栏） ==========
-  var anchorLinks = document.querySelectorAll('.goods ul li a, .sidebar-nav li a');
+  var anchorLinks = document.querySelectorAll('.goods ul li a, .sidebar-nav li a, .nav .dropdown a');
 
   anchorLinks.forEach(function (link) {
     link.addEventListener('click', function (e) {
@@ -34,6 +34,12 @@ document.addEventListener('DOMContentLoaded', function () {
         window.scrollTo({ top: top, behavior: 'smooth' });
       }
     });
+  });
+
+  // 课程卡片 hover 提示
+  var courseCardLinks = document.querySelectorAll('.box .content ul:not(.tool-list) li a');
+  courseCardLinks.forEach(function (link) {
+    link.setAttribute('title', '点击跳转播放');
   });
 
   // ========== 滚动时高亮侧边栏当前项 ==========
@@ -82,35 +88,69 @@ document.addEventListener('DOMContentLoaded', function () {
   // ========== 课程链接：新窗口打开 + B站静音 ==========
   var courseLinks = document.querySelectorAll('.box .content ul li a');
   courseLinks.forEach(function (link) {
+    var href = link.getAttribute('href');
+    // 跳过工具卡片的 javascript:void(0) 和锚点占位
+    if (!href || href.startsWith('javascript:') || href === '#') return;
     link.setAttribute('target', '_blank');
     link.setAttribute('rel', 'noopener');
-    var href = link.getAttribute('href');
-    if (href && href.indexOf('bilibili.com') !== -1) {
+    if (href.indexOf('bilibili.com') !== -1) {
       link.setAttribute('href', href + (href.indexOf('?') === -1 ? '?' : '&') + 'muted=1');
     }
   });
 
-  // ========== 软件工具卡片：点击展开详情面板 ==========
-  var toolCards = document.querySelectorAll('.tool-card');
-  toolCards.forEach(function (card) {
-    card.addEventListener('click', function () {
-      var item = card.closest('.tool-item');
-      if (!item) return;
+  // ========== 软件工具卡片：点击弹出居中弹框 ==========
+  var toolItems = document.querySelectorAll('.tool-item');
+  var overlay = document.getElementById('toolModalOverlay');
+  var modalName = document.getElementById('toolModalName');
+  var modalIntro = document.getElementById('toolModalIntro');
+  var modalReq = document.getElementById('toolModalReq');
+  var modalVer = document.getElementById('toolModalVer');
+  var modalSite = document.getElementById('toolModalSite');
+  var modalDl = document.getElementById('toolModalDl');
+  var modalClose = document.getElementById('toolModalClose');
 
-      // 如果已打开，关闭它
-      if (item.classList.contains('active')) {
-        item.classList.remove('active');
-        return;
-      }
+  function openToolModal(item) {
+    var name = item.getAttribute('data-name');
+    var intro = item.getAttribute('data-intro');
+    var req = item.getAttribute('data-req');
+    var ver = item.getAttribute('data-ver');
+    var site = item.getAttribute('data-site');
+    var dl = item.getAttribute('data-dl');
 
-      // 关闭其他已打开的
-      document.querySelectorAll('.tool-item.active').forEach(function (open) {
-        open.classList.remove('active');
-      });
+    modalName.textContent = name;
+    modalIntro.textContent = intro;
+    modalReq.textContent = req;
+    modalVer.textContent = ver;
+    modalSite.textContent = site;
+    modalSite.setAttribute('href', site);
+    modalDl.setAttribute('href', dl);
+    modalDl.setAttribute('download', '');
 
-      // 打开当前
-      item.classList.add('active');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeToolModal() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  toolItems.forEach(function (item) {
+    item.addEventListener('click', function () {
+      openToolModal(item);
     });
+  });
+
+  modalClose.addEventListener('click', closeToolModal);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) {
+      closeToolModal();
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) {
+      closeToolModal();
+    }
   });
 
   // ========== 返回顶部按钮 ==========

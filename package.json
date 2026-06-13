@@ -1,0 +1,14 @@
+{
+  "name": "learn-online",
+  "version": "1.0.0",
+  "description": "学成在线教育网站",
+  "main": "index.html",
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  }
+}

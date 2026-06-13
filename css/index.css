@@ -50,7 +50,8 @@ body {
   font-family: var(--font-family);
   font-size: 14px;
   color: var(--color-text);
-  background-color: var(--color-bg);
+  background: linear-gradient(135deg, #1a0533 0%, #000000 100%);
+  background-attachment: fixed;
   line-height: 1.6;
   min-width: 320px;
 }
@@ -230,6 +231,67 @@ button {
   color: var(--color-text);
   border-radius: var(--radius-sm);
   transition: background var(--transition), color var(--transition), font-size 0.35s ease;
+}
+
+/* 下拉箭头 */
+.header .nav .arrow {
+  font-size: 14px;
+  margin-left: 4px;
+  vertical-align: middle;
+  transition: transform 0.25s ease;
+}
+
+.header .nav .has-dropdown:hover .arrow {
+  transform: rotate(180deg);
+}
+
+/* 下拉菜单容器 */
+.header .nav .has-dropdown {
+  position: relative;
+}
+
+.header .nav .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: block;
+  min-width: 140px;
+  background: #e8f4fd;
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  padding: 6px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+  z-index: 100;
+  list-style: none;
+}
+
+.header .nav .has-dropdown:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.header .nav .dropdown li {
+  display: block;
+}
+
+.header .nav .dropdown a {
+  display: block;
+  padding: 8px 20px;
+  font-size: 14px;
+  color: var(--color-text);
+  border-radius: 0;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.header .nav .dropdown a:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  animation: none;
 }
 
 .header.compact .nav a {
@@ -578,141 +640,159 @@ button {
 }
 
 /* ============================================
-   软件工具下载 — 可展开详情面板
+   软件工具下载 — 卡片同课程样式 + 居中弹框
    ============================================ */
-/* 软件工具 — 一行一个 */
+
+/* 工具卡片直接复用 .box .content ul li 的课程卡片样式，
+   仅额外指定 pointer、4列网格和占位背景色 */
+
 .box .content .tool-list {
-  display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
 
-.tool-item {
-  position: relative;
-  display: flex;
-  background: var(--color-bg-white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  overflow: visible;
-  transition: box-shadow 0.3s ease;
-}
-
-.tool-item.active {
-  box-shadow: var(--shadow-md);
-  z-index: 2;
-}
-
-/* 左侧卡片 */
-.tool-card {
-  min-width: 160px;
-  max-width: 160px;
+.tool-list .tool-item {
   cursor: pointer;
-  transition: all 0.25s ease;
-  flex-shrink: 0;
-  border-radius: var(--radius-md) 0 0 var(--radius-md);
-  overflow: hidden;
 }
 
-.tool-card:hover {
-  background: var(--color-primary-light);
+/* 交替占位背景 */
+.tool-item:nth-child(odd) a img {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0, #6ee7b7);
 }
 
-.tool-card a {
-  display: block;
+.tool-item:nth-child(even) a img {
+  background: linear-gradient(135deg, #fef3c7, #fde68a, #fcd34d);
 }
 
-.tool-card a img {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  display: block;
-}
-
-.tool-card h3 {
-  font-size: 14px;
-  font-weight: 600;
-  padding: 10px 12px 2px;
-  color: var(--color-text);
-}
-
-.tool-card p {
-  font-size: 12px;
-  color: var(--color-text-muted);
-  padding: 0 12px 12px;
-}
-
-/* 右侧详情面板 */
-.tool-detail {
+/* ---- 弹框遮罩 ---- */
+.tool-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 2000;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  max-width: 0;
-  overflow: hidden;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
-  transition: max-width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease, padding 0.35s ease;
-  padding: 0;
-  border-left: 1px solid transparent;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.tool-item.active .tool-detail {
-  max-width: 560px;
+.tool-modal-overlay.active {
   opacity: 1;
-  padding: 18px 22px;
-  border-left-color: var(--color-border);
+  visibility: visible;
 }
 
-.tool-info {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  flex: 1;
+/* ---- 弹框本体 ---- */
+.tool-modal {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  width: 520px;
+  max-width: 92vw;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 36px 40px 30px;
+  transform: translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.tool-section {
-  margin-bottom: 0;
+.tool-modal-overlay.active .tool-modal {
+  transform: translateY(0);
 }
 
-.tool-section:last-child {
-  margin-bottom: 0;
+/* 关闭按钮 */
+.tool-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #999;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
 }
 
-.tool-section h4 {
-  font-size: 12px;
+.tool-modal-close:hover {
+  color: #333;
+}
+
+/* 软件名称 — 第一行居中加粗 */
+.tool-modal-name {
+  font-size: 22px;
   font-weight: 700;
-  color: var(--color-text-light);
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 24px;
 }
 
-.tool-section p {
-  font-size: 13px;
+/* 详情内容 */
+.tool-modal-body {
+  margin-bottom: 10px;
+}
+
+.tool-modal-section {
+  margin-bottom: 18px;
+}
+
+.tool-modal-section h4 {
+  font-size: 14px;
+  font-weight: 700;
   color: var(--color-text);
-  line-height: 1.6;
+  margin-bottom: 6px;
+}
+
+.tool-modal-section p {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.tool-modal-site {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.tool-modal-site a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.tool-modal-site a:hover {
+  text-decoration: underline;
+}
+
+/* 下载按钮容器 — 居中 */
+.tool-modal-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
 }
 
 /* 下载按钮 */
-.tool-download {
+.tool-modal-download {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 10px 28px;
+  padding: 12px 36px;
   background: var(--color-primary);
   color: #fff;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
-  border-radius: var(--radius-sm);
+  border-radius: 6px;
   text-decoration: none;
   white-space: nowrap;
   transition: all 0.25s ease;
-  align-self: flex-end;
-  margin-top: 16px;
   position: relative;
   overflow: hidden;
 }
 
-.tool-download::after {
+.tool-modal-download::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -721,23 +801,14 @@ button {
   transition: opacity 0.25s ease;
 }
 
-.tool-download:hover {
+.tool-modal-download:hover {
   background: var(--color-primary-dark);
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(26, 115, 232, 0.4);
 }
 
-.tool-download:hover::after {
+.tool-modal-download:hover::after {
   opacity: 1;
-}
-
-/* 交替占位背景 */
-.tool-item:nth-child(odd) .tool-card a img {
-  background: linear-gradient(135deg, #d1fae5, #a7f3d0, #6ee7b7);
-}
-
-.tool-item:nth-child(even) .tool-card a img {
-  background: linear-gradient(135deg, #fef3c7, #fde68a, #fcd34d);
 }
 
 /* ============================================
@@ -880,7 +951,7 @@ button {
   }
 
   .box .content .tool-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .banner .wrapper {
@@ -996,28 +1067,17 @@ button {
     margin-left: 0;
   }
 
-  .tool-item {
-    flex-direction: column;
+  .box .content .tool-list {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .tool-card {
-    min-width: 100%;
-    max-width: 100%;
+  .tool-modal {
+    width: 92vw;
+    padding: 28px 22px 24px;
   }
 
-  .tool-item.active .tool-detail {
-    max-width: 100%;
-    padding: 14px 16px;
-  }
-
-  .tool-info {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .tool-download {
-    align-self: stretch;
-    text-align: center;
+  .tool-modal-name {
+    font-size: 18px;
   }
 }
 
