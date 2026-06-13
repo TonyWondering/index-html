@@ -54,6 +54,10 @@
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
+[data-theme="dark"] .sidebar-title {
+  color: #a78bfa;
+}
+
 /* --- Reset & Base --- */
 *,
 *::before,
@@ -432,6 +436,8 @@ button {
   background: linear-gradient(135deg, #1a3a5c 0%, #1a5276 50%, #1a6e8e 100%);
   min-height: 420px;
   padding: 20px 0;
+  overflow: hidden;
+  position: relative;
 }
 
 .banner .wrapper {
@@ -468,10 +474,11 @@ button {
   opacity: 0.6;
 }
 
-/* 右侧课程表 */
+/* 课程表 */
 .banner .right {
-  flex: 1;
-  background: var(--color-bg-white);
+  width: 260px;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.25);
   border-radius: var(--radius-md);
   padding: 24px;
   box-shadow: var(--shadow-lg);
@@ -697,13 +704,9 @@ button {
   cursor: pointer;
 }
 
-/* 交替占位背景 */
-.tool-item:nth-child(odd) a img {
-  background: linear-gradient(135deg, #d1fae5, #a7f3d0, #6ee7b7);
-}
-
-.tool-item:nth-child(even) a img {
-  background: linear-gradient(135deg, #fef3c7, #fde68a, #fcd34d);
+/* 工具卡片图片样式 */
+.tool-item a img {
+  border-radius: var(--radius-md);
 }
 
 /* ---- 弹框遮罩 ---- */
@@ -727,7 +730,7 @@ button {
 
 /* ---- 弹框本体 ---- */
 .tool-modal {
-  background: #fff;
+  background: var(--color-bg-white);
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   width: 520px;

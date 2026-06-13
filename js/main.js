@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // ========== 主题切换 ==========
   var themeToggle = document.getElementById('themeToggle');
   var themeIcon = themeToggle ? themeToggle.querySelector('.theme-icon') : null;
-  var currentTheme = localStorage.getItem('theme') || 'light';
+  var currentTheme = localStorage.getItem('theme') || 'dark';
 
   function applyTheme(theme) {
     document.body.setAttribute('data-theme', theme);
