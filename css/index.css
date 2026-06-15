@@ -584,6 +584,119 @@ button {
   background: #fff3ee;
 }
 
+/* 收藏课程标签样式 */
+.goods ul li.fav-tag {
+  display: inline-block;
+  position: relative;
+  animation: favTagIn 0.3s ease;
+}
+
+.goods ul li.fav-tag a {
+  display: inline-block;
+  padding: 5px 14px;
+  font-size: 13px;
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border);
+  border-radius: 15px;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.goods ul li.fav-tag a:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.goods ul li.fav-tag .fav-remove {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  border: none;
+  background: #e74c3c;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  padding: 0;
+}
+
+.goods ul li.fav-tag:hover .fav-remove {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.goods ul li.fav-tag .fav-remove:hover {
+  background: #c0392b;
+}
+
+.goods ul li.empty-tip {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  padding: 5px 0;
+}
+
+@keyframes favTagIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes favTagOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+/* 飞行动画粒子 */
+.fly-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  font-size: 24px;
+  transition: none;
+}
+
+/* 收藏提示 */
+.fav-toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 10000;
+  pointer-events: none;
+  animation: toastFade 1s ease forwards;
+}
+
+@keyframes toastFade {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+  15% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  85% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+}
+
 /* ============================================
    精品课程 Box
    ============================================ */
@@ -686,6 +799,47 @@ button {
 .box .content ul li p span {
   color: var(--color-accent);
   font-weight: 600;
+}
+
+/* 收藏爱心按钮 */
+.box .content ul li {
+  position: relative;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 32px;
+  text-align: center;
+  color: #ccc;
+  z-index: 10;
+  transition: transform 0.2s ease, color 0.2s ease;
+  padding: 0;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
+}
+
+.favorite-btn.active {
+  color: #e74c3c;
+  animation: heartBeat 0.4s ease;
+}
+
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.3); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 /* ============================================
