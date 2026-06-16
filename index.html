@@ -592,6 +592,7 @@
       pauseDuration = 2000,
       deletingSpeed = 30,
       loop = true,
+      maxLoops = 0,
       className = '',
       showCursor = true,
       hideCursorWhileTyping = false,
@@ -610,6 +611,7 @@
       const [isDeleting, setIsDeleting] = React.useState(false);
       const [currentTextIndex, setCurrentTextIndex] = React.useState(0);
       const [isVisible, setIsVisible] = React.useState(!startOnVisible);
+      const [loopCount, setLoopCount] = React.useState(0);
       const cursorRef = React.useRef(null);
       const containerRef = React.useRef(null);
 
@@ -695,9 +697,24 @@
               );
             } else if (textArray.length >= 1) {
               if (!loop && currentTextIndex === textArray.length - 1) return;
-              timeout = setTimeout(() => {
-                setIsDeleting(true);
-              }, pauseDuration);
+              // Check maxLoops
+              if (maxLoops > 0 && currentTextIndex === textArray.length - 1) {
+                setLoopCount(prev => {
+                  const newCount = prev + 1;
+                  if (newCount >= maxLoops) {
+                    return newCount;
+                  }
+                  timeout = setTimeout(() => {
+                    setIsDeleting(true);
+                  }, pauseDuration);
+                  return newCount;
+                });
+                if (loopCount >= maxLoops - 1) return;
+              } else {
+                timeout = setTimeout(() => {
+                  setIsDeleting(true);
+                }, pauseDuration);
+              }
             }
           }
         };
@@ -719,6 +736,8 @@
         textArray,
         currentTextIndex,
         loop,
+        maxLoops,
+        loopCount,
         initialDelay,
         isVisible,
         reverseMode,
@@ -844,14 +863,14 @@
 
     .chat-close-btn {
       position: fixed;
-      top: calc(100vh - 100px - 36rem + 8px);
-      right: calc(22px + 8px);
-      width: 36px;
-      height: 36px;
-      background: var(--color-primary);
+      bottom: 86px;
+      right: 86px;
+      width: 48px;
+      height: 48px;
+      background: #18181b;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 50%;
       cursor: pointer;
       z-index: 10000;
       display: none;
@@ -886,17 +905,18 @@
 
     .custom-chatbot-btn {
       position: fixed;
-      bottom: 90px;
-      right: 22px;
-      width: 60px;
-      height: 60px;
+      bottom: 86px;
+      right: 30px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       transition: transform 0.3s ease;
       z-index: 1001;
       overflow: hidden;
       border: none;
+      background: #18181b;
     }
 
     .custom-chatbot-btn:hover {
@@ -904,30 +924,27 @@
     }
 
     .custom-chatbot-btn img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
     }
 
     .chatbot-tooltip {
       position: fixed;
-      bottom: 152px;
-      right: 16px;
+      bottom: 142px;
+      right: 30px;
       background: var(--color-bg-white);
       color: var(--color-text);
-      padding: 12px 16px;
+      padding: 10px 16px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       font-size: 14px;
       z-index: 1000;
       opacity: 0;
       transform: translateY(10px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      max-width: 260px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      max-width: 280px;
       line-height: 1.5;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
     }
 
     .chatbot-tooltip.show {
@@ -939,18 +956,12 @@
       content: '';
       position: absolute;
       bottom: -8px;
-      right: 20px;
+      right: 16px;
       width: 0;
       height: 0;
       border-left: 8px solid transparent;
       border-right: 8px solid transparent;
       border-top: 8px solid var(--color-bg-white);
-    }
-
-    .chatbot-avatar {
-      width: 40px;
-      height: 40px;
-      flex-shrink: 0;
     }
   </style>
   <div class="custom-chatbot-btn" id="customChatbotBtn">
@@ -958,15 +969,25 @@
   </div>
   <button class="chat-close-btn" id="chatCloseBtn">&times;</button>
   <div class="chatbot-tooltip" id="chatbotTooltip">
-    <img class="chatbot-avatar" src="./img/chatbot-avatar-holo.svg" alt="Tony">
-    <div class="chatbot-tooltip-text" id="chatbotTooltipText">点击开始聊天</div>
+    <div class="chatbot-tooltip-text" id="chatbotTooltipText"></div>
   </div>
-  <script>
+  <script type="text/babel">
+    var tooltipTextEl = document.getElementById('chatbotTooltipText');
     var tooltipEl = document.getElementById('chatbotTooltip');
     var customBtn = document.getElementById('customChatbotBtn');
 
-    if (tooltipEl) {
+    if (tooltipTextEl) {
       setTimeout(function () {
+        ReactDOM.createRoot(tooltipTextEl).render(
+          React.createElement(TextType, {
+            text: ["我是网站小助手Tony,点击开始聊天"],
+            typingSpeed: 80,
+            loop: true,
+            maxLoops: 2,
+            showCursor: true,
+            cursorCharacter: "|"
+          })
+        );
         tooltipEl.classList.add('show');
       }, 1000);
     }
