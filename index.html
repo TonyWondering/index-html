@@ -880,9 +880,27 @@
       transition: background 0.2s;
     }
 
-    .chat-close-btn.show {
-      display: flex;
-      animation: closeBtnFadeIn 0.6s ease forwards;
+    .chat-close-btn {
+      position: fixed;
+      bottom: 86px;
+      right: 30px;
+      width: 48px;
+      height: 48px;
+      background: #18181b;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: background 0.2s;
+    }
+
+    .chat-close-btn:hover {
+      background: #27272a;
     }
 
     @keyframes closeBtnFadeIn {
@@ -918,6 +936,10 @@
       padding: 0;
     }
 
+    .custom-chatbot-btn.hidden {
+      display: none;
+    }
+
     .custom-chatbot-btn:hover {
       transform: scale(1.1);
     }
@@ -926,6 +948,29 @@
       width: 48px;
       height: 48px;
       object-fit: contain;
+    }
+
+    .chat-close-btn {
+      position: fixed;
+      bottom: 86px;
+      right: 30px;
+      width: 48px;
+      height: 48px;
+      background: #18181b;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: background 0.2s;
+    }
+
+    .chat-close-btn:hover {
+      background: #27272a;
     }
 
     .chatbot-tooltip {
@@ -1000,14 +1045,14 @@
         chatOpen = !chatOpen;
         if (chatOpen) {
           difyWindow.style.display = 'block';
-          if (closeBtn) {
-            setTimeout(function () {
-              closeBtn.classList.add('show');
-            }, 600);
-          }
+          // Hide robot, show close button
+          if (customBtn) customBtn.classList.add('hidden');
+          if (closeBtn) closeBtn.style.display = 'flex';
         } else {
           difyWindow.style.display = 'none';
-          if (closeBtn) closeBtn.classList.remove('show');
+          // Show robot, hide close button
+          if (customBtn) customBtn.classList.remove('hidden');
+          if (closeBtn) closeBtn.style.display = 'none';
         }
       }
     }
@@ -1018,7 +1063,9 @@
       if (difyWindow) {
         difyWindow.style.display = 'none';
       }
-      if (closeBtn) closeBtn.classList.remove('show');
+      // Show robot, hide close button
+      if (customBtn) customBtn.classList.remove('hidden');
+      if (closeBtn) closeBtn.style.display = 'none';
     }
 
     if (customBtn) {
