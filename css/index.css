@@ -4,58 +4,58 @@
 
 /* --- CSS 变量 / 设计令牌 --- */
 :root {
-  --color-primary: #1a73e8;
-  --color-primary-dark: #1557b0;
-  --color-primary-light: #e8f0fe;
-  --color-accent: #ff6b35;
-  --color-accent-hover: #e55a2b;
-  --color-bg: #ffffff;
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-primary-light: #eff6ff;
+  --color-accent: #059669;
+  --color-accent-hover: #047857;
+  --color-bg: #fafafa;
   --color-bg-white: #ffffff;
-  --color-text: #333333;
-  --color-text-light: #666666;
-  --color-text-muted: #999999;
-  --color-border: #e8e8e8;
-  --color-footer-bg: #263238;
-  --color-footer-text: #b0bec5;
+  --color-text: #18181b;
+  --color-text-light: #52525b;
+  --color-text-muted: #a1a1aa;
+  --color-border: #e4e4e7;
+  --color-footer-bg: #18181b;
+  --color-footer-text: #a1a1aa;
 
-  --font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  --font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
   --wrapper-width: 1200px;
-  --header-height: 72px;
+  --header-height: 64px;
 
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 
   --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
 
-  --transition: 0.2s ease;
+  --transition: 0.15s ease;
 }
 
 /* 暗色主题 */
 [data-theme="dark"] {
-  --color-primary: #60a5fa;
-  --color-primary-dark: #3b82f6;
-  --color-primary-light: #1e3a5f;
-  --color-accent: #f97316;
-  --color-accent-hover: #ea580c;
-  --color-bg: #0f172a;
-  --color-bg-white: #1e293b;
-  --color-text: #ffffff;
-  --color-text-light: #94a3b8;
-  --color-text-muted: #64748b;
-  --color-border: #334155;
-  --color-footer-bg: #0f172a;
-  --color-footer-text: #94a3b8;
+  --color-primary: #3b82f6;
+  --color-primary-dark: #2563eb;
+  --color-primary-light: #1e293b;
+  --color-accent: #10b981;
+  --color-accent-hover: #059669;
+  --color-bg: #09090b;
+  --color-bg-white: #18181b;
+  --color-text: #fafafa;
+  --color-text-light: #a1a1aa;
+  --color-text-muted: #71717a;
+  --color-border: #27272a;
+  --color-footer-bg: #09090b;
+  --color-footer-text: #71717a;
 
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
 }
 
 [data-theme="dark"] .sidebar-title {
-  color: #a78bfa;
+  color: var(--color-text);
 }
 
 /* --- Reset & Base --- */
@@ -169,12 +169,11 @@ button {
 
 .sidebar-nav li a:hover,
 .sidebar-nav li a.active {
-  color: #fff;
-  background: var(--color-primary);
-  border-left-color: var(--color-primary-dark);
-  border-bottom-color: var(--color-primary);
-  font-size: 15px;
-  font-weight: 600;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  border-left-color: var(--color-primary);
+  border-bottom-color: var(--color-border);
+  font-weight: 500;
 }
 
 /* 主内容区 — 为侧边栏留空间 */
@@ -342,29 +341,6 @@ button {
 .header .nav a:hover {
   background: var(--color-primary-light);
   color: var(--color-primary);
-  animation: navBounce 0.35s ease;
-}
-
-@keyframes navBounce {
-  0% {
-    transform: translateY(0);
-  }
-
-  30% {
-  transform: translateY(-8px);
-  }
-
-  50% {
-    transform: translateY(0);
-  }
-
-  70% {
-    transform: translateY(-2px);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
 }
 
 /* 搜索 */
@@ -433,8 +409,8 @@ button {
    轮播图 Banner
    ============================================ */
 .banner {
-  background: linear-gradient(135deg, #1a3a5c 0%, #1a5276 50%, #1a6e8e 100%);
-  min-height: 420px;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  min-height: 320px;
   padding: 20px 0;
   overflow: hidden;
   position: relative;
@@ -443,6 +419,31 @@ button {
 .banner .wrapper {
   display: flex;
   gap: 20px;
+  position: relative;
+}
+
+.banner-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.banner-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.banner-subtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
 }
 
 /* 左侧课程分类 */
@@ -671,7 +672,7 @@ button {
   pointer-events: none;
   z-index: 9999;
   font-size: 24px;
-  transition: none;
+  will-change: transform, opacity;
 }
 
 /* 收藏提示 */
@@ -756,8 +757,8 @@ button {
 }
 
 .box .content ul li:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .box .content ul li a img {
@@ -766,16 +767,16 @@ button {
   object-fit: cover;
   display: block;
   /* 图片加载失败时的占位背景 */
-  background: linear-gradient(135deg, #e0e7ff, #c7d2fe, #a5b4fc);
+  background: #f4f4f5;
 }
 
 /* 不同卡片不同色调的占位背景 — 2项交替 */
 .box .content ul li:nth-child(odd) a img {
-  background: linear-gradient(135deg, #e0f2fe, #bae6fd, #7dd3fc);
+  background: #f4f4f5;
 }
 
 .box .content ul li:nth-child(even) a img {
-  background: linear-gradient(135deg, #fce7f3, #fbcfe8, #f9a8d4);
+  background: #e4e4e7;
 }
 
 .box .content ul li h3 {
@@ -830,15 +831,12 @@ button {
 }
 
 .favorite-btn.active {
-  color: #e74c3c;
-  animation: heartBeat 0.4s ease;
+  color: #ef4444;
 }
 
 @keyframes heartBeat {
   0% { transform: scale(1); }
-  25% { transform: scale(1.3); }
-  50% { transform: scale(1); }
-  75% { transform: scale(1.2); }
+  50% { transform: scale(1.15); }
   100% { transform: scale(1); }
 }
 
@@ -986,28 +984,11 @@ button {
   border-radius: 6px;
   text-decoration: none;
   white-space: nowrap;
-  transition: all 0.25s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.tool-modal-download::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: background 0.15s ease;
 }
 
 .tool-modal-download:hover {
   background: var(--color-primary-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(26, 115, 232, 0.4);
-}
-
-.tool-modal-download:hover::after {
-  opacity: 1;
 }
 
 /* ============================================
@@ -1305,7 +1286,6 @@ button {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
 }
 .auth-box {
   position: relative;

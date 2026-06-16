@@ -377,20 +377,20 @@ document.addEventListener('DOMContentLoaded', function () {
     particle.style.left = btnRect.left + btnRect.width / 2 - 12 + 'px';
     particle.style.top = btnRect.top + btnRect.height / 2 - 12 + 'px';
     document.body.appendChild(particle);
-    var targetX = barRect.left + barRect.width / 2;
-    var targetY = barRect.top + barRect.height / 2;
-    gsap.to(particle, {
-      x: targetX - btnRect.left - 12,
-      y: targetY - btnRect.top - 12,
-      scale: 0.5,
-      opacity: 0.5,
-      duration: 0.6,
-      ease: 'power2.in',
-      onComplete: function() {
-        particle.remove();
-        updateFavoritesBar();
-      }
+    var targetX = barRect.left + barRect.width / 2 - btnRect.left - 12;
+    var targetY = barRect.top + barRect.height / 2 - btnRect.top - 12;
+    
+    // Use CSS transition instead of GSAP
+    particle.style.transition = 'transform 0.6s ease-in, opacity 0.6s ease-in';
+    requestAnimationFrame(function() {
+      particle.style.transform = 'translate(' + targetX + 'px, ' + targetY + 'px) scale(0.5)';
+      particle.style.opacity = '0.5';
     });
+    
+    setTimeout(function() {
+      particle.remove();
+      updateFavoritesBar();
+    }, 600);
   }
 
   function showToast(msg) {

@@ -6,13 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>码上成长</title>
   <link rel="stylesheet" type="text/css" href="./css/index.css" />
-  <link rel="stylesheet" type="text/css" href="./css/text-type.css" />
-  <link rel="stylesheet" type="text/css" href="./css/pixel-blast.css" />
-  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="./js/api.js"></script>
 </head>
 
@@ -134,16 +127,15 @@
   <!-- 主内容区 -->
   <div class="main-content">
 
-    <!-- 轮播图banner -->
-    <div class="banner">
-      <div id="galaxy-background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
+  <!-- 轮播图banner -->
+  <div class="banner">
+    <div class="wrapper" style="position: relative; z-index: 1;">
+      <div class="banner-center">
+        <h2 class="banner-title">码上成长</h2>
+        <p class="banner-subtitle">系统学习编程，从入门到精通</p>
       </div>
-      <div class="wrapper" style="position: relative; z-index: 1;">
-        <div id="banner-center"
-          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; text-align: center; pointer-events: none;">
-        </div>
-        <div class="right">
-          <h2>我的课程表</h2>
+      <div class="right">
+        <h2>我的课程表</h2>
           <div class="content">
             <dl>
               <dt>继续学习 程序设计语言</dt>
@@ -587,430 +579,6 @@
   </div><!-- /.main-content -->
 
   <script src="./js/main.js"></script>
-  <script type="text/babel">
-    const TextType = ({
-      text,
-      as: Component = 'div',
-      typingSpeed = 50,
-      initialDelay = 0,
-      pauseDuration = 2000,
-      deletingSpeed = 30,
-      loop = true,
-      className = '',
-      showCursor = true,
-      hideCursorWhileTyping = false,
-      cursorCharacter = '|',
-      cursorClassName = '',
-      cursorBlinkDuration = 0.5,
-      textColors = [],
-      variableSpeed,
-      onSentenceComplete,
-      startOnVisible = false,
-      reverseMode = false,
-      ...props
-    }) => {
-      const [displayedText, setDisplayedText] = React.useState('');
-      const [currentCharIndex, setCurrentCharIndex] = React.useState(0);
-      const [isDeleting, setIsDeleting] = React.useState(false);
-      const [currentTextIndex, setCurrentTextIndex] = React.useState(0);
-      const [isVisible, setIsVisible] = React.useState(!startOnVisible);
-      const cursorRef = React.useRef(null);
-      const containerRef = React.useRef(null);
-
-      const textArray = React.useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
-
-      const getRandomSpeed = React.useCallback(() => {
-        if (!variableSpeed) return typingSpeed;
-        const { min, max } = variableSpeed;
-        return Math.random() * (max - min) + min;
-      }, [variableSpeed, typingSpeed]);
-
-      const getCurrentTextColor = () => {
-        if (textColors.length === 0) return 'inherit';
-        return textColors[currentTextIndex % textColors.length];
-      };
-
-      React.useEffect(() => {
-        if (!startOnVisible || !containerRef.current) return;
-
-        const observer = new IntersectionObserver(
-          entries => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                setIsVisible(true);
-              }
-            });
-          },
-          { threshold: 0.1 }
-        );
-
-        observer.observe(containerRef.current);
-        return () => observer.disconnect();
-      }, [startOnVisible]);
-
-      React.useEffect(() => {
-        if (showCursor && cursorRef.current) {
-          gsap.set(cursorRef.current, { opacity: 1 });
-          gsap.to(cursorRef.current, {
-            opacity: 0,
-            duration: cursorBlinkDuration,
-            repeat: -1,
-            yoyo: true,
-            ease: 'power2.inOut'
-          });
-        }
-      }, [showCursor, cursorBlinkDuration]);
-
-      React.useEffect(() => {
-        if (!isVisible) return;
-
-        let timeout;
-        const currentText = textArray[currentTextIndex];
-        const processedText = reverseMode ? currentText.split('').reverse().join('') : currentText;
-
-        const executeTypingAnimation = () => {
-          if (isDeleting) {
-            if (displayedText === '') {
-              setIsDeleting(false);
-              if (currentTextIndex === textArray.length - 1 && !loop) {
-                return;
-              }
-
-              if (onSentenceComplete) {
-                onSentenceComplete(textArray[currentTextIndex], currentTextIndex);
-              }
-
-              setCurrentTextIndex(prev => (prev + 1) % textArray.length);
-              setCurrentCharIndex(0);
-              timeout = setTimeout(() => { }, pauseDuration);
-            } else {
-              timeout = setTimeout(() => {
-                setDisplayedText(prev => prev.slice(0, -1));
-              }, deletingSpeed);
-            }
-          } else {
-            if (currentCharIndex < processedText.length) {
-              timeout = setTimeout(
-                () => {
-                  setDisplayedText(prev => prev + processedText[currentCharIndex]);
-                  setCurrentCharIndex(prev => prev + 1);
-                },
-                variableSpeed ? getRandomSpeed() : typingSpeed
-              );
-            } else if (textArray.length >= 1) {
-              if (!loop && currentTextIndex === textArray.length - 1) return;
-              timeout = setTimeout(() => {
-                setIsDeleting(true);
-              }, pauseDuration);
-            }
-          }
-        };
-
-        if (currentCharIndex === 0 && !isDeleting && displayedText === '') {
-          timeout = setTimeout(executeTypingAnimation, initialDelay);
-        } else {
-          executeTypingAnimation();
-        }
-
-        return () => clearTimeout(timeout);
-      }, [
-        currentCharIndex,
-        displayedText,
-        isDeleting,
-        typingSpeed,
-        deletingSpeed,
-        pauseDuration,
-        textArray,
-        currentTextIndex,
-        loop,
-        initialDelay,
-        isVisible,
-        reverseMode,
-        variableSpeed,
-        onSentenceComplete
-      ]);
-
-      const shouldHideCursor =
-        hideCursorWhileTyping && (currentCharIndex < textArray[currentTextIndex].length || isDeleting);
-
-      return React.createElement(
-        Component,
-        {
-          ref: containerRef,
-          className: `text-type ${className}`,
-          ...props
-        },
-        React.createElement('span', { className: 'text-type__content', style: { color: getCurrentTextColor() || 'inherit' } }, displayedText),
-        showCursor && React.createElement(
-          'span',
-          {
-            ref: cursorRef,
-            className: `text-type__cursor ${cursorClassName} ${shouldHideCursor ? 'text-type__cursor--hidden' : ''}`
-          },
-          cursorCharacter
-        )
-      );
-    };
-  </script>
-  <script type="text/babel">
-    // 渲染TextType组件到banner中央
-    const bannerCenter = document.getElementById('banner-center');
-    if (bannerCenter) {
-      ReactDOM.createRoot(bannerCenter).render(
-        React.createElement(TextType, {
-          text: ["欢迎来到码上成长", "学习编程", "掌握技术", "工具下载"],
-          typingSpeed: 100,
-          pauseDuration: 2000,
-          showCursor: true,
-          cursorCharacter: "|",
-          style: { fontSize: '56px', fontWeight: 'bold', color: 'white', textShadow: '0 2px 8px rgba(0,0,0,0.3)' }
-        })
-      );
-    }
-  </script>
-  <script type="text/babel">
-    const PixelBlast = ({
-      pixelSize = 6,
-      color = '#B497CF',
-      patternScale = 3,
-      patternDensity = 1.2,
-      pixelSizeJitter = 0.5,
-      enableRipples = true,
-      rippleSpeed = 0.4,
-      rippleThickness = 0.12,
-      rippleIntensityScale = 1.5,
-      speed = 0.6,
-      edgeFade = 0.25,
-      transparent = true,
-      variant = 'circle',
-      ...rest
-    }) => {
-      const containerRef = React.useRef(null);
-
-      React.useEffect(() => {
-        const container = containerRef.current;
-        if (!container) return;
-
-        const canvas = document.createElement('canvas');
-        canvas.style.width = '100%';
-        canvas.style.height = '100%';
-        container.appendChild(canvas);
-        const ctx = canvas.getContext('2d');
-
-        let animId;
-        let time = 0;
-        const ripples = [];
-
-        function hexToRgb(hex) {
-          const r = parseInt(hex.slice(1, 3), 16);
-          const g = parseInt(hex.slice(3, 5), 16);
-          const b = parseInt(hex.slice(5, 7), 16);
-          return { r, g, b };
-        }
-
-        const baseColor = hexToRgb(color);
-
-        function resize() {
-          canvas.width = container.clientWidth * Math.min(window.devicePixelRatio, 2);
-          canvas.height = container.clientHeight * Math.min(window.devicePixelRatio, 2);
-        }
-
-        function hash(x, y) {
-          let h = x * 374761393 + y * 668265263;
-          h = (h ^ (h >> 13)) * 1274126177;
-          return ((h ^ (h >> 16)) & 0x7fffffff) / 0x7fffffff;
-        }
-
-        function noise2d(x, y) {
-          const ix = Math.floor(x), iy = Math.floor(y);
-          const fx = x - ix, fy = y - iy;
-          const sx = fx * fx * (3 - 2 * fx);
-          const sy = fy * fy * (3 - 2 * fy);
-          const n00 = hash(ix, iy);
-          const n10 = hash(ix + 1, iy);
-          const n01 = hash(ix, iy + 1);
-          const n11 = hash(ix + 1, iy + 1);
-          return (n00 * (1 - sx) + n10 * sx) * (1 - sy) + (n01 * (1 - sx) + n11 * sx) * sy;
-        }
-
-        function fbm(x, y, t) {
-          let val = 0, amp = 1, freq = 1;
-          for (let i = 0; i < 5; i++) {
-            val += amp * noise2d(x * freq + t * 0.03, y * freq + t * 0.02);
-            freq *= 1.25;
-            amp *= 0.8;
-          }
-          return val;
-        }
-
-        function draw() {
-          time += 0.016 * speed;
-          const w = canvas.width, h = canvas.height;
-          ctx.clearRect(0, 0, w, h);
-
-          const ps = pixelSize * Math.min(window.devicePixelRatio, 2);
-          const cols = Math.ceil(w / ps);
-          const rows = Math.ceil(h / ps);
-          const aspectRatio = w / h;
-
-          for (let row = 0; row < rows; row++) {
-            for (let col = 0; col < cols; col++) {
-              const px = col * ps + ps / 2;
-              const py = row * ps + ps / 2;
-
-              const nx = (col / cols) * patternScale;
-              const ny = (row / rows) * patternScale;
-              let feed = fbm(nx, ny, time) * 0.5 - 0.5 + (patternDensity - 0.5) * 0.35;
-
-              if (enableRipples) {
-                for (const rip of ripples) {
-                  const rx = rip.x / ps;
-                  const ry = rip.y / ps;
-                  const dx = col - rx;
-                  const dy = row - ry;
-                  const dist = Math.sqrt(dx * dx + dy * dy) * ps / w;
-                  const waveR = rippleSpeed * rip.age;
-                  const ring = Math.exp(-Math.pow((dist - waveR) / rippleThickness, 2.0));
-                  const atten = Math.exp(-1.0 * rip.age) * Math.exp(-10.0 * dist);
-                  feed = Math.max(feed, ring * atten * rippleIntensityScale);
-                }
-              }
-
-              const bayer = ((col & 1) * 2 + (row & 1)) * 0.25 - 0.5;
-              const bw = feed + bayer > 0.5 ? 1 : 0;
-
-              if (bw <= 0) continue;
-
-              const jitter = pixelSizeJitter > 0 ? 1 + (hash(col, row) - 0.5) * pixelSizeJitter : 1;
-              const coverage = bw * jitter;
-
-              if (edgeFade > 0) {
-                const normX = col / cols, normY = row / rows;
-                const edge = Math.min(normX, normY, 1 - normX, 1 - normY);
-                if (edge < edgeFade) continue;
-              }
-
-              const alpha = Math.min(coverage, 1);
-              const r = baseColor.r, g = baseColor.g, b = baseColor.b;
-              const flicker = 0.7 + 0.3 * Math.sin(time * 3 + hash(col, row) * 6.28);
-              const finalAlpha = alpha * flicker;
-
-              ctx.fillStyle = `rgba(${r},${g},${b},${finalAlpha})`;
-
-              if (variant === 'circle') {
-                const radius = ps * 0.4 * coverage;
-                ctx.beginPath();
-                ctx.arc(px, py, radius, 0, Math.PI * 2);
-                ctx.fill();
-              } else if (variant === 'diamond') {
-                const s = ps * 0.4 * coverage;
-                ctx.save();
-                ctx.translate(px, py);
-                ctx.rotate(Math.PI / 4);
-                ctx.fillRect(-s, -s, s * 2, s * 2);
-                ctx.restore();
-              } else if (variant === 'triangle') {
-                const s = ps * 0.5 * coverage;
-                ctx.beginPath();
-                ctx.moveTo(px, py - s);
-                ctx.lineTo(px - s, py + s);
-                ctx.lineTo(px + s, py + s);
-                ctx.closePath();
-                ctx.fill();
-              } else {
-                const s = ps * 0.45 * coverage;
-                ctx.fillRect(px - s, py - s, s * 2, s * 2);
-              }
-            }
-          }
-
-          for (let i = ripples.length - 1; i >= 0; i--) {
-            ripples[i].age += 0.016 * speed;
-            if (ripples[i].age > 3) ripples.splice(i, 1);
-          }
-
-          animId = requestAnimationFrame(draw);
-        }
-
-        function handleClick(e) {
-          if (!enableRipples) return;
-          const rect = canvas.getBoundingClientRect();
-          const scaleX = canvas.width / rect.width;
-          const scaleY = canvas.height / rect.height;
-          ripples.push({
-            x: (e.clientX - rect.left) * scaleX,
-            y: (e.clientY - rect.top) * scaleY,
-            age: 0
-          });
-        }
-
-        resize();
-        draw();
-        canvas.addEventListener('click', handleClick);
-        window.addEventListener('resize', resize);
-
-        return () => {
-          cancelAnimationFrame(animId);
-          canvas.removeEventListener('click', handleClick);
-          window.removeEventListener('resize', resize);
-          if (container.contains(canvas)) container.removeChild(canvas);
-        };
-      }, [pixelSize, color, patternScale, patternDensity, pixelSizeJitter, enableRipples, rippleSpeed, rippleThickness, rippleIntensityScale, speed, edgeFade, transparent, variant]);
-
-      return React.createElement('div', {
-        ref: containerRef,
-        className: 'pixel-blast-container',
-        style: { width: '100%', height: '100%', position: 'relative', overflow: 'hidden' },
-        ...rest
-      });
-    };
-  </script>
-  <script type="text/babel">
-    const galaxyBackground = document.getElementById('galaxy-background');
-    if (galaxyBackground) {
-      ReactDOM.createRoot(galaxyBackground).render(
-        React.createElement(PixelBlast, {
-          variant: 'circle',
-          pixelSize: 8,
-          color: '#B497CF',
-          patternScale: 1.5,
-          patternDensity: 1.2,
-          pixelSizeJitter: 0.5,
-          enableRipples: true,
-          rippleSpeed: 0.4,
-          rippleThickness: 0.12,
-          rippleIntensityScale: 1.5,
-          speed: 0.6,
-          edgeFade: 0.0,
-          transparent: true
-        })
-      );
-    }
-  </script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      gsap.registerPlugin(ScrollTrigger);
-      const boxes = document.querySelectorAll('.box');
-      boxes.forEach(box => {
-        const cards = box.querySelectorAll('.content ul li');
-        cards.forEach((card, index) => {
-          gsap.from(card, {
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 80%',
-              toggleActions: 'play none none none'
-            },
-            opacity: 0,
-            y: 50,
-            duration: 0.8,
-            delay: index * 0.3,
-            ease: 'power2.out',
-            clearProps: "all"
-          });
-        });
-      });
-    });
-  </script>
 
   <!-- Dify AI 助手 -->
   <script>
@@ -1071,7 +639,7 @@
       right: calc(22px + 8px);
       width: 36px;
       height: 36px;
-      background: rgb(17, 156, 233);
+      background: var(--color-primary);
       color: white;
       border: none;
       border-radius: 8px;
@@ -1100,7 +668,7 @@
     }
 
     .chat-close-btn:hover {
-      background: linear-gradient(135deg, #1557b0, #339af0);
+      background: var(--color-primary-dark);
     }
 
     .chat-close-btn.show {
@@ -1182,24 +750,14 @@
   <button class="chat-close-btn" id="chatCloseBtn">&times;</button>
   <div class="chatbot-tooltip" id="chatbotTooltip">
     <img class="chatbot-avatar" src="./img/chatbot-avatar-holo.svg" alt="Tony">
-    <div class="chatbot-tooltip-text" id="chatbotTooltipText"></div>
+    <div class="chatbot-tooltip-text" id="chatbotTooltipText">点击开始聊天</div>
   </div>
-  <script type="text/babel">
-    var tooltipTextEl = document.getElementById('chatbotTooltipText');
+  <script>
     var tooltipEl = document.getElementById('chatbotTooltip');
     var customBtn = document.getElementById('customChatbotBtn');
 
-    if (tooltipTextEl) {
+    if (tooltipEl) {
       setTimeout(function () {
-        ReactDOM.createRoot(tooltipTextEl).render(
-          React.createElement(TextType, {
-            text: ["我是网站小助手Tony，点击开始聊天"],
-            typingSpeed: 80,
-            loop: false,
-            showCursor: true,
-            cursorCharacter: "|"
-          })
-        );
         tooltipEl.classList.add('show');
       }, 1000);
     }
