@@ -1102,7 +1102,7 @@
   <div id="authModal" class="auth-modal" style="display:none;">
     <div class="auth-overlay" onclick="hideAuthModal()"></div>
     <div class="auth-box">
-      <button class="auth-close" onclick="hideAuthModal()">&times;</button>
+      <button class="auth-close" onclick="hideAuthModal()">✕</button>
       <div class="auth-tabs">
         <button class="auth-tab active" onclick="switchAuthTab('login')">登录</button>
         <button class="auth-tab" onclick="switchAuthTab('register')">注册</button>
@@ -1112,7 +1112,7 @@
         <input type="password" name="password" placeholder="密码" required>
         <div class="captcha-row">
           <input type="text" name="code" placeholder="验证码" required>
-          <img id="captchaImg" src="" alt="验证码" onclick="loadCaptcha()" style="cursor:pointer;height:38px;border-radius:6px;">
+          <img id="captchaImg" src="" alt="验证码" onclick="loadCaptcha()" style="cursor:pointer;height:36px;border-radius:4px;">
         </div>
         <button type="submit">登录</button>
       </form>
@@ -1121,7 +1121,7 @@
         <input type="password" name="password" placeholder="密码" required>
         <div class="captcha-row" id="regCaptchaRow">
           <input type="text" name="code" placeholder="验证码" required>
-          <img id="regCaptchaImg" src="" alt="验证码" onclick="loadRegCaptcha()" style="cursor:pointer;height:38px;border-radius:6px;">
+          <img id="regCaptchaImg" src="" alt="验证码" onclick="loadRegCaptcha()" style="cursor:pointer;height:36px;border-radius:4px;">
         </div>
         <button type="submit">注册</button>
       </form>
