@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="retroGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B"/>
+      <stop offset="100%" style="stop-color:#D97706"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 天线 - 复古弹簧 -->
+  <path d="M 100 40 Q 110 35 100 30 Q 90 25 100 20 Q 110 15 100 10" stroke="#92400E" stroke-width="3" fill="none"/>
+  <circle cx="100" cy="8" r="5" fill="#EF4444"/>
+  
+  <!-- 头部 - 显像管风格 -->
+  <rect x="48" y="38" width="104" height="88" rx="20" fill="url(#retroGrad)"/>
+  
+  <!-- 铆钉 -->
+  <circle cx="58" cy="48" r="4" fill="#92400E"/>
+  <circle cx="142" cy="48" r="4" fill="#92400E"/>
+  <circle cx="58" cy="118" r="4" fill="#92400E"/>
+  <circle cx="142" cy="118" r="4" fill="#92400E"/>
+  
+  <!-- 眼睛 - 复古圆眼 -->
+  <circle cx="78" cy="75" r="18" fill="#FEF3C7"/>
+  <circle cx="122" cy="75" r="18" fill="#FEF3C7"/>
+  <circle cx="80" cy="77" r="10" fill="#1C1917"/>
+  <circle cx="124" cy="77" r="10" fill="#1C1917"/>
+  <circle cx="84" cy="73" r="4" fill="white"/>
+  <circle cx="128" cy="73" r="4" fill="white"/>
+  
+  <!-- 嘴巴 - 栅格 -->
+  <rect x="82" y="100" width="36" height="12" rx="3" fill="#92400E"/>
+  <line x1="88" y1="100" x2="88" y2="112" stroke="#FEF3C7" stroke-width="2"/>
+  <line x1="94" y1="100" x2="94" y2="112" stroke="#FEF3C7" stroke-width="2"/>
+  <line x1="100" y1="100" x2="100" y2="112" stroke="#FEF3C7" stroke-width="2"/>
+  <line x1="106" y1="100" x2="106" y2="112" stroke="#FEF3C7" stroke-width="2"/>
+  <line x1="112" y1="100" x2="112" y2="112" stroke="#FEF3C7" stroke-width="2"/>
+  
+  <!-- 耳朵 - 螺丝 -->
+  <circle cx="35" cy="75" r="12" fill="#92400E"/>
+  <circle cx="35" cy="75" r="6" fill="#D97706"/>
+  <circle cx="165" cy="75" r="12" fill="#92400E"/>
+  <circle cx="165" cy="75" r="6" fill="#D97706"/>
+  
+  <!-- 身体 -->
+  <rect x="60" y="128" width="80" height="52" rx="15" fill="url(#retroGrad)"/>
+  
+  <!-- 胸部仪表 -->
+  <circle cx="100" cy="155" r="14" fill="#92400E"/>
+  <circle cx="100" cy="155" r="10" fill="#FEF3C7"/>
+  <line x1="100" y1="155" x2="100" y2="148" stroke="#1C1917" stroke-width="2" stroke-linecap="round"/>
+  <line x1="100" y1="155" x2="106" y2="158" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- 手臂 -->
+  <rect x="35" y="135" width="25" height="16" rx="6" fill="#D97706"/>
+  <rect x="140" y="135" width="25" height="16" rx="6" fill="#D97706"/>
+</svg>

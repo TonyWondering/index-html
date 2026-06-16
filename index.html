@@ -2,1241 +2,1444 @@
 <html>
 
 <head lang="zh-CN">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>码上成长</title>
-    <link rel="stylesheet" type="text/css" href="./css/index.css" />
-    <link rel="stylesheet" type="text/css" href="./css/text-type.css" />
-    <link rel="stylesheet" type="text/css" href="./css/pixel-blast.css" />
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>码上成长</title>
+  <link rel="stylesheet" type="text/css" href="./css/index.css" />
+  <link rel="stylesheet" type="text/css" href="./css/text-type.css" />
+  <link rel="stylesheet" type="text/css" href="./css/pixel-blast.css" />
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="./js/api.js"></script>
 </head>
 
 <body>
-    <!-- 头部header -->
-    <div class="header">
-        <div class="wrapper header-inner">
-            <h1>
-                <a href=""><img src="./img/logo.svg" alt="码上成长"></a>
-            </h1>
-            <div class="header-right">
-                <div class="nav">
-                    <ul>
-                        <li class="theme-toggle" id="themeToggle">
-                            <a href="javascript:void(0)" title="切换主题">
-                                <span class="theme-icon">☀️</span>
-                            </a>
-                        </li>
-                        <li class="has-dropdown">
-                            <a href="#">前端开发 <span class="arrow">▾</span></a>
-                            <ul class="dropdown">
-                                <li><a href="#html">HTML</a></li>
-                                <li><a href="#css">CSS</a></li>
-                                <li><a href="#javascript">JavaScript</a></li>
-                                <li><a href="#vue">Vue</a></li>
-                                <li><a href="#bootstrap">Bootstrap</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-dropdown">
-                            <a href="#">后端开发 <span class="arrow">▾</span></a>
-                            <ul class="dropdown">
-                                <li><a href="#java">Java</a></li>
-                                <li><a href="#python">Python</a></li>
-                                <li><a href="#mysql">MySQL</a></li>
-                                <li><a href="#redis">Redis</a></li>
-                                <li><a href="#linux">Linux</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-dropdown">
-                            <a href="#">高级语言 <span class="arrow">▾</span></a>
-                            <ul class="dropdown">
-                                <li><a href="#java">Java</a></li>
-                                <li><a href="#python">Python</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-dropdown">
-                            <a href="#">机器学习 <span class="arrow">▾</span></a>
-                            <ul class="dropdown">
-                                <li><a href="#pytorch">PyTorch</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-dropdown">
-                            <a href="#">AI大模型 <span class="arrow">▾</span></a>
-                            <ul class="dropdown">
-                                <li><a href="#agent">Agent</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-dropdown">
-                            <a href="#">高级语言 <span class="arrow">▾</span></a>
-                            <ul class="dropdown">
-                                <li><a href="#java">Java</a></li>
-                                <li><a href="#python">Python</a></li>
-                            </ul>
-                        </li>
-                        <li class="has-dropdown">
-                            <a href="#">软件工具 <span class="arrow">▾</span></a>
-                            <ul class="dropdown">
-                                <li><a href="#tools">Postman</a></li>
-                                <li><a href="#tools">VS Code</a></li>
-                                <li><a href="#tools">IntelliJ IDEA</a></li>
-                                <li><a href="#tools">Maven</a></li>
-                                <li><a href="#tools">GitHub Desktop</a></li>
-                                <li><a href="#tools">MarkText</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="search">
-                    <input type="text" placeholder="请输入关键字">
-                    <button></button>
-                </div>
-                <div class="user">
-                    <img src="./img/user.svg" alt="用户头像">
-                    <span>lilei</span>
-                </div>
-            </div>
+  <!-- 头部header -->
+  <div class="header">
+    <div class="wrapper header-inner">
+      <h1>
+        <a href=""><img src="./img/logo.svg" alt="码上成长"></a>
+      </h1>
+      <div class="header-right">
+        <div class="nav">
+          <ul>
+            <li class="theme-toggle" id="themeToggle">
+              <a href="javascript:void(0)" title="切换主题">
+                <span class="theme-icon">☀️</span>
+              </a>
+            </li>
+            <li class="has-dropdown">
+              <a href="#">前端开发 <span class="arrow">▾</span></a>
+              <ul class="dropdown">
+                <li><a href="#html">HTML</a></li>
+                <li><a href="#css">CSS</a></li>
+                <li><a href="#javascript">JavaScript</a></li>
+                <li><a href="#vue">Vue</a></li>
+                <li><a href="#bootstrap">Bootstrap</a></li>
+              </ul>
+            </li>
+            <li class="has-dropdown">
+              <a href="#">后端开发 <span class="arrow">▾</span></a>
+              <ul class="dropdown">
+                <li><a href="#java">Java</a></li>
+                <li><a href="#python">Python</a></li>
+                <li><a href="#mysql">MySQL</a></li>
+                <li><a href="#redis">Redis</a></li>
+                <li><a href="#linux">Linux</a></li>
+              </ul>
+            </li>
+            <li class="has-dropdown">
+              <a href="#">高级语言 <span class="arrow">▾</span></a>
+              <ul class="dropdown">
+                <li><a href="#java">Java</a></li>
+                <li><a href="#python">Python</a></li>
+              </ul>
+            </li>
+            <li class="has-dropdown">
+              <a href="#">机器学习 <span class="arrow">▾</span></a>
+              <ul class="dropdown">
+                <li><a href="#pytorch">PyTorch</a></li>
+              </ul>
+            </li>
+            <li class="has-dropdown">
+              <a href="#">AI大模型 <span class="arrow">▾</span></a>
+              <ul class="dropdown">
+                <li><a href="#agent">Agent</a></li>
+              </ul>
+            </li>
+            <li class="has-dropdown">
+              <a href="#">高级语言 <span class="arrow">▾</span></a>
+              <ul class="dropdown">
+                <li><a href="#java">Java</a></li>
+                <li><a href="#python">Python</a></li>
+              </ul>
+            </li>
+            <li class="has-dropdown">
+              <a href="#">软件工具 <span class="arrow">▾</span></a>
+              <ul class="dropdown">
+                <li><a href="#tools">Postman</a></li>
+                <li><a href="#tools">VS Code</a></li>
+                <li><a href="#tools">IntelliJ IDEA</a></li>
+                <li><a href="#tools">Maven</a></li>
+                <li><a href="#tools">GitHub Desktop</a></li>
+                <li><a href="#tools">MarkText</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
+        <div class="search">
+          <input type="text" placeholder="请输入关键字">
+          <button></button>
+        </div>
+        <div class="user" id="userArea">
+          <img src="./img/user.svg" alt="用户头像">
+          <span id="userNameDisplay" onclick="showAuthModal()">登录</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 左侧固定侧边栏 -->
+  <aside class="sidebar">
+    <div class="sidebar-title">课程推荐</div>
+    <ul class="sidebar-nav">
+      <li><a href="#html" class="active">HTML</a></li>
+      <li><a href="#css">CSS</a></li>
+      <li><a href="#javascript">JavaScript</a></li>
+      <li><a href="#java">Java</a></li>
+      <li><a href="#python">Python</a></li>
+      <li><a href="#mysql">MySQL</a></li>
+      <li><a href="#redis">Redis</a></li>
+      <li><a href="#vue">Vue</a></li>
+      <li><a href="#pytorch">PyTorch</a></li>
+      <li><a href="#git">Git</a></li>
+      <li><a href="#linux">Linux</a></li>
+      <li><a href="#bootstrap">Bootstrap</a></li>
+      <li><a href="#agent">Agent</a></li>
+    </ul>
+    <div class="sidebar-title">软件工具</div>
+    <ul class="sidebar-nav">
+      <li><a href="#tool-postman">Postman</a></li>
+      <li><a href="#tool-vscode">VS Code</a></li>
+      <li><a href="#tool-idea">IntelliJ IDEA</a></li>
+      <li><a href="#tool-maven">Maven</a></li>
+      <li><a href="#tool-github-desktop">GitHub Desktop</a></li>
+      <li><a href="#tool-marktext">MarkText</a></li>
+    </ul>
+  </aside>
+
+  <!-- 主内容区 -->
+  <div class="main-content">
+
+    <!-- 轮播图banner -->
+    <div class="banner">
+      <div id="galaxy-background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
+      </div>
+      <div class="wrapper" style="position: relative; z-index: 1;">
+        <div id="banner-center"
+          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; text-align: center; pointer-events: none;">
+        </div>
+        <div class="right">
+          <h2>我的课程表</h2>
+          <div class="content">
+            <dl>
+              <dt>继续学习 程序设计语言</dt>
+              <dd>正在学习-使用对象</dd>
+            </dl>
+            <dl>
+              <dt>继续学习 程序设计语言</dt>
+              <dd>正在学习-使用对象</dd>
+            </dl>
+            <dl>
+              <dt>继续学习 程序设计语言</dt>
+              <dd>正在学习-使用对象</dd>
+            </dl>
+          </div>
+          <a href="#" class="more">全部课程</a>
+        </div>
+      </div>
     </div>
 
-    <!-- 左侧固定侧边栏 -->
-    <aside class="sidebar">
-        <div class="sidebar-title">课程推荐</div>
-        <ul class="sidebar-nav">
-            <li><a href="#html" class="active">HTML</a></li>
-            <li><a href="#css">CSS</a></li>
-            <li><a href="#javascript">JavaScript</a></li>
-            <li><a href="#java">Java</a></li>
-            <li><a href="#python">Python</a></li>
-            <li><a href="#mysql">MySQL</a></li>
-            <li><a href="#redis">Redis</a></li>
-            <li><a href="#vue">Vue</a></li>
-            <li><a href="#pytorch">PyTorch</a></li>
-            <li><a href="#git">Git</a></li>
-            <li><a href="#linux">Linux</a></li>
-            <li><a href="#bootstrap">Bootstrap</a></li>
-            <li><a href="#agent">Agent</a></li>
+    <!-- 收藏课程 -->
+    <div class="goods wrapper">
+      <h2>收藏课程</h2>
+      <ul id="favoritesList">
+        <li class="empty-tip">暂无收藏，点击课程卡片上的爱心即可收藏</li>
+      </ul>
+    </div>
+
+    <!-- HTML -->
+    <div class="box wrapper" id="html">
+      <div class="title">
+        <h2>HTML</h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li data-course-id="html-basic"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV14J4114768/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
+                src="./img/class1.svg" alt="HTML5 语义化标签实战"></a>
+            <h3>HTML 基础教程</h3>
+            <p><span>初级</span> · 总课时：57h</p>
+          </li>
+          <li data-course-id="html-advanced"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV1p84y1P7Z5/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
+                src="./img/class2.svg" alt="HTML 表单深入解析"></a>
+            <h3>HTML5 新特性</h3>
+            <p><span>中级</span> · 总课时：51h</p>
+          </li>
         </ul>
-        <div class="sidebar-title">软件工具</div>
-        <ul class="sidebar-nav">
-            <li><a href="#tool-postman">Postman</a></li>
-            <li><a href="#tool-vscode">VS Code</a></li>
-            <li><a href="#tool-idea">IntelliJ IDEA</a></li>
-            <li><a href="#tool-maven">Maven</a></li>
-            <li><a href="#tool-github-desktop">GitHub Desktop</a></li>
-            <li><a href="#tool-marktext">MarkText</a></li>
+      </div>
+    </div>
+
+    <!-- CSS -->
+    <div class="box wrapper" id="css">
+      <div class="title">
+        <h2>CSS</h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li data-course-id="css-basic"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV14J4114768/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
+                src="./img/class3.svg" alt="CSS3 动画与过渡效果"></a>
+            <h3>CSS 基础教程</h3>
+            <p><span>初级</span> · 总课时：57h</p>
+          </li>
+          <li data-course-id="css-advanced"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV1p84y1P7Z5/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
+                src="./img/class4.svg" alt="Flexbox 与 Grid 布局实战"></a>
+            <h3>CSS3 新特性</h3>
+            <p><span>中级</span> · 总课时：51h</p>
+          </li>
         </ul>
-    </aside>
+      </div>
+    </div>
 
-    <!-- 主内容区 -->
-    <div class="main-content">
+    <!-- JavaScript -->
+    <div class="box wrapper" id="javascript">
+      <div class="title">
+        <h2>JavaScript</h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li data-course-id="javascript-basic"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV1Y84y1L7Nn/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
+                src="./img/class1.svg" alt="JavaScript ES6+ 核心特性"></a>
+            <h3>JavaScript 入门到进阶</h3>
+            <p><span>中级</span> · 总课时：60h</p>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-        <!-- 轮播图banner -->
-        <div class="banner">
-            <div id="galaxy-background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></div>
-            <div class="wrapper" style="position: relative; z-index: 1;">
-                <div id="banner-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; text-align: center; pointer-events: none;"></div>
-                <div class="right">
-                    <h2>我的课程表</h2>
-                    <div class="content">
-                        <dl>
-                            <dt>继续学习 程序设计语言</dt>
-                            <dd>正在学习-使用对象</dd>
-                        </dl>
-                        <dl>
-                            <dt>继续学习 程序设计语言</dt>
-                            <dd>正在学习-使用对象</dd>
-                        </dl>
-                        <dl>
-                            <dt>继续学习 程序设计语言</dt>
-                            <dd>正在学习-使用对象</dd>
-                        </dl>
-                    </div>
-                    <a href="#" class="more">全部课程</a>
-                </div>
-            </div>
+    <!-- Java -->
+    <div class="box wrapper" id="java">
+      <div class="title">
+        <h2>Java</h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li data-course-id="java-basic"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV1o841187iP/?spm_id_from=333.788.player.switch&vd_source=d6b893b1a505e67adc6b81e0a5472ee3&p=24"><img
+                src="./img/class3.svg" alt="Java 面向对象编程基础"></a>
+            <h3>Java 面向对象编程基础</h3>
+            <p><span>初级</span> · 总课时：19h</p>
+          </li>
+          <li data-course-id="java-advanced"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV1TE41177mP/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
+                src="./img/class4.svg" alt="Java 进阶教程"></a>
+            <h3>Java 进阶教程</h3>
+            <p><span>高级</span> · 总课时：49h</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Python -->
+    <div class="box wrapper" id="python">
+      <div class="title">
+        <h2>Python</h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li data-course-id="python-basic"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV17G4y1U7jh?spm_id_from=333.788.videopod.episodes&vd_source=d6b893b1a505e67adc6b81e0a5472ee3&p=2"><img
+                src="./img/class1.svg" alt="Python 数据分析入门"></a>
+            <h3>Python 基础入门</h3>
+            <p><span>初级</span> · 总课时：122h</p>
+          </li>
+          <li data-course-id="python-data"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV1D9GLzyEL6/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
+                src="./img/class2.svg" alt="Python Web 开发 Flask 实战"></a>
+            <h3>Python 数据分析</h3>
+            <p><span>中级</span> · 总课时：16h</p>
+          </li>
+          <li data-course-id="python-crawler"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV1Db4y1m7Ho/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
+                src="./img/class2.svg" alt="Python Web 开发 Flask 实战"></a>
+            <h3>Python 爬虫</h3>
+            <p><span>高级</span> · 总课时：22h</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MySQL -->
+    <div class="box wrapper" id="mysql">
+      <div class="title">
+        <h2>MySQL</h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li data-course-id="mysql-basic"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV1AX4y147tA/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
+                src="./img/class3.svg" alt="MySQL 查询优化实战"></a>
+            <h3>MySQL 快速入门</h3>
+            <p><span>初级</span> · 总课时：56h</p>
+          </li>
+          <li data-course-id="mysql-advanced"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV1Kr4y1i7ru/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
+                src="./img/class4.svg" alt="数据库设计与范式"></a>
+            <h3>MySQL 进阶教程</h3>
+            <p><span>高级</span> · 总课时：30h</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Redis -->
+    <div class="box wrapper" id="redis">
+      <div class="title">
+        <h2>Redis</h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li data-course-id="redis-cache"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img
+                src="./img/class1.svg" alt="Redis 缓存策略实战"></a>
+            <h3>Redis 缓存策略实战</h3>
+            <p><span>高级</span> · 总课时：15h</p>
+          </li>
+          <li data-course-id="redis-lock"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img
+                src="./img/class2.svg" alt="Redis 分布式锁应用"></a>
+            <h3>Redis 分布式锁应用</h3>
+            <p><span>高级</span> · 总课时：10h</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Vue -->
+    <div class="box wrapper" id="vue">
+      <div class="title">
+        <h2>Vue</h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li data-course-id="vue-basic"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV1Zy4y1K7SH/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
+                src="./img/class3.svg" alt="Vue 3 组合式 API"></a>
+            <h3>Vue 基础教程</h3>
+            <p><span>初级</span> · 总课时：46h</p>
+          </li>
+          <li data-course-id="vue-advanced"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV1Xh411V7b5/?vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
+                src="./img/class4.svg" alt="Vue Router 路由管理"></a>
+            <h3>Vue3 项目实战</h3>
+            <p><span>高级</span> · 总课时：43h</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PyTorch -->
+    <div class="box wrapper" id="pytorch">
+      <div class="title">
+        <h2>PyTorch</h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li data-course-id="pytorch-basic"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img
+                src="./img/class1.svg" alt="PyTorch 深度学习入门"></a>
+            <h3>PyTorch 深度学习入门</h3>
+            <p><span>中级</span> · 总课时：25h</p>
+          </li>
+          <li data-course-id="pytorch-advanced"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img
+                src="./img/class2.svg" alt="PyTorch 图像分类实战"></a>
+            <h3>PyTorch 图像分类实战</h3>
+            <p><span>高级</span> · 总课时：20h</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Git -->
+    <div class="box wrapper" id="git">
+      <div class="title">
+        <h2>Git</h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li data-course-id="git-basic"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV1wm4y1z7Dg/?spm_id_from=333.788.player.switch&vd_source=d6b893b1a505e67adc6b81e0a5472ee3&p=21"><img
+                src="./img/class3.svg" alt="Git 版本控制基础"></a>
+            <h3>Git 基础教程</h3>
+            <p><span>初级</span> · 总课时：3h</p>
+          </li>
+          <li data-course-id="git-advanced"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV1zmvkeeEoM/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
+                src="./img/class4.svg" alt="Git 分支管理与协作"></a>
+            <h3>Git 企业项目实战</h3>
+            <p><span>中级</span> · 总课时：4h</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Linux -->
+    <div class="box wrapper" id="linux">
+      <div class="title">
+        <h2>Linux</h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li data-course-id="linux-basic"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img
+                src="./img/class1.svg" alt="Linux 常用命令实战"></a>
+            <h3>Linux 常用命令实战</h3>
+            <p><span>初级</span> · 总课时：15h</p>
+          </li>
+          <li data-course-id="linux-shell"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img
+                src="./img/class2.svg" alt="Shell 脚本编程入门"></a>
+            <h3>Shell 脚本编程入门</h3>
+            <p><span>中级</span> · 总课时：18h</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bootstrap -->
+    <div class="box wrapper" id="bootstrap">
+      <div class="title">
+        <h2>Bootstrap</h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li data-course-id="bootstrap-basic"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img
+                src="./img/class3.svg" alt="Bootstrap 5 响应式布局"></a>
+            <h3>Bootstrap 5 响应式布局</h3>
+            <p><span>初级</span> · 总课时：12h</p>
+          </li>
+          <li data-course-id="bootstrap-advanced"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img
+                src="./img/class4.svg" alt="Bootstrap 组件实战"></a>
+            <h3>Bootstrap 组件实战</h3>
+            <p><span>中级</span> · 总课时：15h</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Agent -->
+    <div class="box wrapper" id="agent">
+      <div class="title">
+        <h2>Agent</h2>
+      </div>
+      <div class="content">
+        <ul>
+          <li data-course-id="agent-dify"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV116w5zuEbo/?spm_id_from=333.337.search-card.all.click&vd_source=1547bf1b36cf7a7c1c987f34be364447"><img
+                src="./img/class1.svg" alt="AI Agent 架构设计"></a>
+            <h3>基于dify的Agent开发</h3>
+            <p><span>初级</span> · 总课时：4h</p>
+          </li>
+          <li data-course-id="agent-andrew"><button class="favorite-btn" title="收藏">♡</button><a
+              href="https://www.bilibili.com/video/BV1DfrdByE2H/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
+                src="./img/class2.svg" alt="LLM Agent 开发实战"></a>
+            <h3>吴恩达讲Agent</h3>
+            <p><span>高级</span> · 总课时：6h</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 软件工具下载 -->
+    <div class="box wrapper" id="tools">
+      <div class="title">
+        <h2>软件工具</h2>
+      </div>
+      <div class="content">
+        <ul class="tool-list">
+          <li class="tool-item" id="tool-postman" data-name="Postman"
+            data-intro="Postman 是全球最流行的 API 测试与开发工具，支持 REST、GraphQL 等多种协议，提供直观的界面来构建、测试和文档化 API。"
+            data-req="Windows 10+ / macOS 11+ / Linux (x64)" data-ver="v11.2.0" data-site="https://www.postman.com/"
+            data-dl="./downloads/Postman (x64).exe">
+            <a href="javascript:void(0)"><img src="./img/tool-postman.svg" alt="Postman"></a>
+            <h3>Postman</h3>
+            <p>API 开发与测试工具</p>
+          </li>
+          <li class="tool-item" id="tool-vscode" data-name="VS Code"
+            data-intro="Visual Studio Code 是微软推出的免费开源代码编辑器，支持几乎所有编程语言，拥有丰富的扩展生态和强大的调试功能。"
+            data-req="Windows 10+ / macOS 11+ / Linux (x64, ARM64)" data-ver="v1.95.3"
+            data-site="https://code.visualstudio.com/" data-dl="./downloads/VSCodeSetup.exe">
+            <a href="javascript:void(0)"><img src="./img/tool-vscode.svg" alt="VS Code"></a>
+            <h3>VS Code</h3>
+            <p>轻量级代码编辑器</p>
+          </li>
+          <li class="tool-item" id="tool-idea" data-name="IntelliJ IDEA"
+            data-intro="JetBrains 出品的旗舰级 Java IDE，提供智能代码补全、深度静态分析、内置版本控制等企业级开发特性。"
+            data-req="Windows 10+ / macOS 12+ / Linux (x64)，最低 4GB 内存" data-ver="v2024.3 (Community / Ultimate)"
+            data-site="https://www.jetbrains.com/idea/" data-dl="./downloads/ideaIU.exe">
+            <a href="javascript:void(0)"><img src="./img/tool-intellij.svg" alt="IntelliJ IDEA"></a>
+            <h3>IntelliJ IDEA</h3>
+            <p>Java 开发利器</p>
+          </li>
+          <li class="tool-item" id="tool-maven" data-name="Maven"
+            data-intro="Apache Maven 是 Java 生态中最流行的项目管理和构建工具，通过 POM 文件统一管理依赖、编译、测试、打包和部署流程。"
+            data-req="Windows / macOS / Linux，需 JDK 8+" data-ver="v3.9.9" data-site="https://maven.apache.org/"
+            data-dl="./downloads/apache-maven.zip">
+            <a href="javascript:void(0)"><img src="./img/tool-maven.svg" alt="Maven"></a>
+            <h3>Maven</h3>
+            <p>项目构建与管理工具</p>
+          </li>
+          <li class="tool-item" id="tool-github-desktop" data-name="GitHub Desktop"
+            data-intro="GitHub 官方出品的 Git 桌面客户端，无需命令行即可完成仓库克隆、提交、分支管理和 Pull Request 操作。"
+            data-req="Windows 10 64-bit+ / macOS 11+" data-ver="v3.4.12" data-site="https://desktop.github.com/"
+            data-dl="./downloads/GitHubDesktopSetup.exe">
+            <a href="javascript:void(0)"><img src="./img/tool-github.svg" alt="GitHub Desktop"></a>
+            <h3>GitHub Desktop</h3>
+            <p>Git 图形化管理工具</p>
+          </li>
+          <li class="tool-item" id="tool-marktext" data-name="MarkText"
+            data-intro="MarkText 是一款开源免费的 Markdown 编辑器，支持实时预览、多种主题、数学公式和流程图，界面简洁优雅。"
+            data-req="Windows 10+ / macOS 11+ / Linux" data-ver="v0.17.1" data-site="https://www.marktext.cc/"
+            data-dl="./downloads/marktext-setup.exe">
+            <a href="javascript:void(0)"><img src="./img/tool-marktext.svg" alt="MarkText"></a>
+            <h3>MarkText</h3>
+            <p>Markdown 编辑器</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 软件工具弹框 -->
+    <div class="tool-modal-overlay" id="toolModalOverlay">
+      <div class="tool-modal">
+        <button class="tool-modal-close" id="toolModalClose">&times;</button>
+        <h2 class="tool-modal-name" id="toolModalName"></h2>
+        <div class="tool-modal-body">
+          <div class="tool-modal-section">
+            <h4>软件介绍</h4>
+            <p id="toolModalIntro"></p>
+          </div>
+          <div class="tool-modal-section">
+            <h4>系统要求</h4>
+            <p id="toolModalReq"></p>
+          </div>
+          <div class="tool-modal-section">
+            <h4>版本号</h4>
+            <p id="toolModalVer"></p>
+          </div>
+          <div class="tool-modal-section">
+            <p class="tool-modal-site">官网网址：<a id="toolModalSite" href="#" target="_blank" rel="noopener"></a></p>
+          </div>
         </div>
-
-        <!-- 收藏课程 -->
-        <div class="goods wrapper">
-            <h2>收藏课程</h2>
-            <ul id="favoritesList">
-                <li class="empty-tip">暂无收藏，点击课程卡片上的爱心即可收藏</li>
-            </ul>
+        <div class="tool-modal-action">
+          <a class="tool-modal-download" id="toolModalDl" href="#" target="_blank" rel="noopener" download>点击下载</a>
         </div>
+      </div>
+    </div>
 
-        <!-- HTML -->
-        <div class="box wrapper" id="html">
-            <div class="title">
-                <h2>HTML</h2>
-            </div>
-            <div class="content">
-                <ul>
-                    <li data-course-id="html-basic"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV14J4114768/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
-                                src="./img/class1.svg" alt="HTML5 语义化标签实战"></a>
-                        <h3>HTML 基础教程</h3>
-                        <p><span>初级</span> · 总课时：20h</p>
-                    </li>
-                    <li data-course-id="html-advanced"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV1p84y1P7Z5/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
-                                src="./img/class2.svg" alt="HTML 表单深入解析"></a>
-                        <h3>HTML5 新特性</h3>
-                        <p><span>中级</span> · 总课时：15h</p>
-                    </li>
-                </ul>
-            </div>
+    <!-- 版权 -->
+    <div class="footer">
+      <div class="wrapper">
+        <div class="left">
+          <img src="./img/logo.svg" alt="码上成长">
+          <p>码上成长致力于普及中国最好的教育，它与中国一流大学和机构合作提供在线课程。<br>
+            @ 2017年XTCG Inc.保留所有权利。-沪ICP备15025210号</p>
+          <a href="#">下载APP</a>
         </div>
-
-        <!-- CSS -->
-        <div class="box wrapper" id="css">
-            <div class="title">
-                <h2>CSS</h2>
-            </div>
-            <div class="content">
-                <ul>
-                    <li data-course-id="css-basic"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV14J4114768/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
-                                src="./img/class3.svg" alt="CSS3 动画与过渡效果"></a>
-                        <h3>CSS 基础教程</h3>
-                        <p><span>初级</span> · 总课时：25h</p>
-                    </li>
-                    <li data-course-id="css-advanced"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV1p84y1P7Z5/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
-                                src="./img/class4.svg" alt="Flexbox 与 Grid 布局实战"></a>
-                        <h3>CSS3 新特性</h3>
-                        <p><span>中级</span> · 总课时：18h</p>
-                    </li>
-                </ul>
-            </div>
+        <div class="right">
+          <dl>
+            <dt>合作伙伴</dt>
+            <dd><a href="#">合作机构</a></dd>
+            <dd><a href="#">合作导师</a></dd>
+          </dl>
+          <dl>
+            <dt>新手指南</dt>
+            <dd><a href="#">如何注册</a></dd>
+            <dd><a href="#">如何选课</a></dd>
+            <dd><a href="#">如何拿到毕业证</a></dd>
+            <dd><a href="#">学分是什么</a></dd>
+            <dd><a href="#">考试未通过怎么办</a></dd>
+          </dl>
+          <dl>
+            <dt>关于学成网</dt>
+            <dd><a href="#">关于</a></dd>
+            <dd><a href="#">管理团队</a></dd>
+            <dd><a href="#">工作机会</a></dd>
+            <dd><a href="#">客户服务</a></dd>
+            <dd><a href="#">帮助</a></dd>
+          </dl>
         </div>
+      </div>
+    </div>
 
-        <!-- JavaScript -->
-        <div class="box wrapper" id="javascript">
-            <div class="title">
-                <h2>JavaScript</h2>
-            </div>
-            <div class="content">
-                <ul>
-                    <li data-course-id="javascript-basic"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV1Y84y1L7Nn/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
-                                src="./img/class1.svg" alt="JavaScript ES6+ 核心特性"></a>
-                        <h3>JavaScript 入门到进阶</h3>
-                        <p><span>中级</span> · 总课时：40h</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+  </div><!-- /.main-content -->
 
-        <!-- Java -->
-        <div class="box wrapper" id="java">
-            <div class="title">
-                <h2>Java</h2>
-            </div>
-            <div class="content">
-                <ul>
-                    <li data-course-id="java-basic"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV1o841187iP/?spm_id_from=333.788.player.switch&vd_source=d6b893b1a505e67adc6b81e0a5472ee3&p=24"><img
-                                src="./img/class3.svg" alt="Java 面向对象编程基础"></a>
-                        <h3>Java 面向对象编程基础</h3>
-                        <p><span>初级</span> · 总课时：30h</p>
-                    </li>
-                    <li data-course-id="java-advanced"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV1TE41177mP/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
-                                src="./img/class4.svg" alt="Java 进阶教程"></a>
-                        <h3>Java 进阶教程</h3>
-                        <p><span>高级</span> · 总课时：35h</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+  <script src="./js/main.js"></script>
+  <script type="text/babel">
+    const TextType = ({
+      text,
+      as: Component = 'div',
+      typingSpeed = 50,
+      initialDelay = 0,
+      pauseDuration = 2000,
+      deletingSpeed = 30,
+      loop = true,
+      className = '',
+      showCursor = true,
+      hideCursorWhileTyping = false,
+      cursorCharacter = '|',
+      cursorClassName = '',
+      cursorBlinkDuration = 0.5,
+      textColors = [],
+      variableSpeed,
+      onSentenceComplete,
+      startOnVisible = false,
+      reverseMode = false,
+      ...props
+    }) => {
+      const [displayedText, setDisplayedText] = React.useState('');
+      const [currentCharIndex, setCurrentCharIndex] = React.useState(0);
+      const [isDeleting, setIsDeleting] = React.useState(false);
+      const [currentTextIndex, setCurrentTextIndex] = React.useState(0);
+      const [isVisible, setIsVisible] = React.useState(!startOnVisible);
+      const cursorRef = React.useRef(null);
+      const containerRef = React.useRef(null);
 
-        <!-- Python -->
-        <div class="box wrapper" id="python">
-            <div class="title">
-                <h2>Python</h2>
-            </div>
-            <div class="content">
-                <ul>
-                    <li data-course-id="python-basic"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV17G4y1U7jh?spm_id_from=333.788.videopod.episodes&vd_source=d6b893b1a505e67adc6b81e0a5472ee3&p=2"><img
-                                src="./img/class1.svg" alt="Python 数据分析入门"></a>
-                        <h3>Python 基础入门</h3>
-                        <p><span>初级</span> · 总课时：25h</p>
-                    </li>
-                    <li data-course-id="python-data"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV1D9GLzyEL6/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
-                                src="./img/class2.svg" alt="Python Web 开发 Flask 实战"></a>
-                        <h3>Python 数据分析</h3>
-                        <p><span>中级</span> · 总课时：20h</p>
-                    </li>
-                    <li data-course-id="python-crawler"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV1Db4y1m7Ho/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
-                                src="./img/class2.svg" alt="Python Web 开发 Flask 实战"></a>
-                        <h3>Python 爬虫</h3>
-                        <p><span>高级</span> · 总课时：15h</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+      const textArray = React.useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
 
-        <!-- MySQL -->
-        <div class="box wrapper" id="mysql">
-            <div class="title">
-                <h2>MySQL</h2>
-            </div>
-            <div class="content">
-                <ul>
-                    <li data-course-id="mysql-basic"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV1AX4y147tA/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
-                                src="./img/class3.svg" alt="MySQL 查询优化实战"></a>
-                        <h3>MySQL 快速入门</h3>
-                        <p><span>初级</span> · 总课时：20h</p>
-                    </li>
-                    <li data-course-id="mysql-advanced"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV1Kr4y1i7ru/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
-                                src="./img/class4.svg" alt="数据库设计与范式"></a>
-                        <h3>MySQL 进阶教程</h3>
-                        <p><span>高级</span> · 总课时：25h</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+      const getRandomSpeed = React.useCallback(() => {
+        if (!variableSpeed) return typingSpeed;
+        const { min, max } = variableSpeed;
+        return Math.random() * (max - min) + min;
+      }, [variableSpeed, typingSpeed]);
 
-        <!-- Redis -->
-        <div class="box wrapper" id="redis">
-            <div class="title">
-                <h2>Redis</h2>
-            </div>
-            <div class="content">
-                <ul>
-                    <li data-course-id="redis-cache"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img src="./img/class1.svg" alt="Redis 缓存策略实战"></a>
-                        <h3>Redis 缓存策略实战</h3>
-                        <p><span>高级</span> · 总课时：15h</p>
-                    </li>
-                    <li data-course-id="redis-lock"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img src="./img/class2.svg" alt="Redis 分布式锁应用"></a>
-                        <h3>Redis 分布式锁应用</h3>
-                        <p><span>高级</span> · 总课时：10h</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+      const getCurrentTextColor = () => {
+        if (textColors.length === 0) return 'inherit';
+        return textColors[currentTextIndex % textColors.length];
+      };
 
-        <!-- Vue -->
-        <div class="box wrapper" id="vue">
-            <div class="title">
-                <h2>Vue</h2>
-            </div>
-            <div class="content">
-                <ul>
-                    <li data-course-id="vue-basic"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV1Zy4y1K7SH/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
-                                src="./img/class3.svg" alt="Vue 3 组合式 API"></a>
-                        <h3>Vue 基础教程</h3>
-                        <p><span>初级</span> · 总课时：20h</p>
-                    </li>
-                    <li data-course-id="vue-advanced"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV1Xh411V7b5/?vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
-                                src="./img/class4.svg" alt="Vue Router 路由管理"></a>
-                        <h3>Vue3 项目实战</h3>
-                        <p><span>高级</span> · 总课时：30h</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+      React.useEffect(() => {
+        if (!startOnVisible || !containerRef.current) return;
 
-        <!-- PyTorch -->
-        <div class="box wrapper" id="pytorch">
-            <div class="title">
-                <h2>PyTorch</h2>
-            </div>
-            <div class="content">
-                <ul>
-                    <li data-course-id="pytorch-basic"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img src="./img/class1.svg" alt="PyTorch 深度学习入门"></a>
-                        <h3>PyTorch 深度学习入门</h3>
-                        <p><span>中级</span> · 总课时：25h</p>
-                    </li>
-                    <li data-course-id="pytorch-advanced"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img src="./img/class2.svg" alt="PyTorch 图像分类实战"></a>
-                        <h3>PyTorch 图像分类实战</h3>
-                        <p><span>高级</span> · 总课时：20h</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        const observer = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                setIsVisible(true);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
 
-        <!-- Git -->
-        <div class="box wrapper" id="git">
-            <div class="title">
-                <h2>Git</h2>
-            </div>
-            <div class="content">
-                <ul>
-                    <li data-course-id="git-basic"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV1wm4y1z7Dg/?spm_id_from=333.788.player.switch&vd_source=d6b893b1a505e67adc6b81e0a5472ee3&p=21"><img
-                                src="./img/class3.svg" alt="Git 版本控制基础"></a>
-                        <h3>Git 版本控制基础</h3>
-                        <p><span>初级</span> · 总课时：8h</p>
-                    </li>
-                    <li data-course-id="git-advanced"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img src="./img/class4.svg" alt="Git 分支管理与协作"></a>
-                        <h3>Git 分支管理与协作</h3>
-                        <p><span>中级</span> · 总课时：12h</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        observer.observe(containerRef.current);
+        return () => observer.disconnect();
+      }, [startOnVisible]);
 
-        <!-- Linux -->
-        <div class="box wrapper" id="linux">
-            <div class="title">
-                <h2>Linux</h2>
-            </div>
-            <div class="content">
-                <ul>
-                    <li data-course-id="linux-basic"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img src="./img/class1.svg" alt="Linux 常用命令实战"></a>
-                        <h3>Linux 常用命令实战</h3>
-                        <p><span>初级</span> · 总课时：15h</p>
-                    </li>
-                    <li data-course-id="linux-shell"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img src="./img/class2.svg" alt="Shell 脚本编程入门"></a>
-                        <h3>Shell 脚本编程入门</h3>
-                        <p><span>中级</span> · 总课时：18h</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+      React.useEffect(() => {
+        if (showCursor && cursorRef.current) {
+          gsap.set(cursorRef.current, { opacity: 1 });
+          gsap.to(cursorRef.current, {
+            opacity: 0,
+            duration: cursorBlinkDuration,
+            repeat: -1,
+            yoyo: true,
+            ease: 'power2.inOut'
+          });
+        }
+      }, [showCursor, cursorBlinkDuration]);
 
-        <!-- Bootstrap -->
-        <div class="box wrapper" id="bootstrap">
-            <div class="title">
-                <h2>Bootstrap</h2>
-            </div>
-            <div class="content">
-                <ul>
-                    <li data-course-id="bootstrap-basic"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img src="./img/class3.svg" alt="Bootstrap 5 响应式布局"></a>
-                        <h3>Bootstrap 5 响应式布局</h3>
-                        <p><span>初级</span> · 总课时：12h</p>
-                    </li>
-                    <li data-course-id="bootstrap-advanced"><button class="favorite-btn" title="收藏">♡</button><a href="#"><img src="./img/class4.svg" alt="Bootstrap 组件实战"></a>
-                        <h3>Bootstrap 组件实战</h3>
-                        <p><span>中级</span> · 总课时：15h</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+      React.useEffect(() => {
+        if (!isVisible) return;
 
-        <!-- Agent -->
-        <div class="box wrapper" id="agent">
-            <div class="title">
-                <h2>Agent</h2>
-            </div>
-            <div class="content">
-                <ul>
-                    <li data-course-id="agent-dify"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV116w5zuEbo/?spm_id_from=333.337.search-card.all.click&vd_source=1547bf1b36cf7a7c1c987f34be364447"><img
-                                src="./img/class1.svg" alt="AI Agent 架构设计"></a>
-                        <h3>基于dify的Agent开发</h3>
-                        <p><span>初级</span> · 总课时：10h</p>
-                    </li>
-                    <li data-course-id="agent-andrew"><button class="favorite-btn" title="收藏">♡</button><a
-                            href="https://www.bilibili.com/video/BV1DfrdByE2H/?spm_id_from=333.337.search-card.all.click&vd_source=d6b893b1a505e67adc6b81e0a5472ee3"><img
-                                src="./img/class2.svg" alt="LLM Agent 开发实战"></a>
-                        <h3>吴恩达讲Agent</h3>
-                        <p><span>高级</span> · 总课时：20h</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        let timeout;
+        const currentText = textArray[currentTextIndex];
+        const processedText = reverseMode ? currentText.split('').reverse().join('') : currentText;
 
-        <!-- 软件工具下载 -->
-        <div class="box wrapper" id="tools">
-            <div class="title">
-                <h2>软件工具</h2>
-            </div>
-            <div class="content">
-                <ul class="tool-list">
-                    <li class="tool-item" id="tool-postman" data-name="Postman"
-                        data-intro="Postman 是全球最流行的 API 测试与开发工具，支持 REST、GraphQL 等多种协议，提供直观的界面来构建、测试和文档化 API。"
-                        data-req="Windows 10+ / macOS 11+ / Linux (x64)" data-ver="v11.2.0"
-                        data-site="https://www.postman.com/" data-dl="./downloads/Postman (x64).exe">
-                        <a href="javascript:void(0)"><img src="./img/tool-postman.svg" alt="Postman"></a>
-                        <h3>Postman</h3>
-                        <p>API 开发与测试工具</p>
-                    </li>
-                    <li class="tool-item" id="tool-vscode" data-name="VS Code"
-                        data-intro="Visual Studio Code 是微软推出的免费开源代码编辑器，支持几乎所有编程语言，拥有丰富的扩展生态和强大的调试功能。"
-                        data-req="Windows 10+ / macOS 11+ / Linux (x64, ARM64)" data-ver="v1.95.3"
-                        data-site="https://code.visualstudio.com/" data-dl="./downloads/VSCodeSetup.exe">
-                        <a href="javascript:void(0)"><img src="./img/tool-vscode.svg" alt="VS Code"></a>
-                        <h3>VS Code</h3>
-                        <p>轻量级代码编辑器</p>
-                    </li>
-                    <li class="tool-item" id="tool-idea" data-name="IntelliJ IDEA"
-                        data-intro="JetBrains 出品的旗舰级 Java IDE，提供智能代码补全、深度静态分析、内置版本控制等企业级开发特性。"
-                        data-req="Windows 10+ / macOS 12+ / Linux (x64)，最低 4GB 内存"
-                        data-ver="v2024.3 (Community / Ultimate)" data-site="https://www.jetbrains.com/idea/"
-                        data-dl="./downloads/ideaIU.exe">
-                        <a href="javascript:void(0)"><img src="./img/tool-intellij.svg" alt="IntelliJ IDEA"></a>
-                        <h3>IntelliJ IDEA</h3>
-                        <p>Java 开发利器</p>
-                    </li>
-                    <li class="tool-item" id="tool-maven" data-name="Maven"
-                        data-intro="Apache Maven 是 Java 生态中最流行的项目管理和构建工具，通过 POM 文件统一管理依赖、编译、测试、打包和部署流程。"
-                        data-req="Windows / macOS / Linux，需 JDK 8+" data-ver="v3.9.9"
-                        data-site="https://maven.apache.org/" data-dl="./downloads/apache-maven.zip">
-                        <a href="javascript:void(0)"><img src="./img/tool-maven.svg" alt="Maven"></a>
-                        <h3>Maven</h3>
-                        <p>项目构建与管理工具</p>
-                    </li>
-                    <li class="tool-item" id="tool-github-desktop" data-name="GitHub Desktop"
-                        data-intro="GitHub 官方出品的 Git 桌面客户端，无需命令行即可完成仓库克隆、提交、分支管理和 Pull Request 操作。"
-                        data-req="Windows 10 64-bit+ / macOS 11+" data-ver="v3.4.12"
-                        data-site="https://desktop.github.com/" data-dl="./downloads/GitHubDesktopSetup.exe">
-                        <a href="javascript:void(0)"><img src="./img/tool-github.svg" alt="GitHub Desktop"></a>
-                        <h3>GitHub Desktop</h3>
-                        <p>Git 图形化管理工具</p>
-                    </li>
-                    <li class="tool-item" id="tool-marktext" data-name="MarkText"
-                        data-intro="MarkText 是一款开源免费的 Markdown 编辑器，支持实时预览、多种主题、数学公式和流程图，界面简洁优雅。"
-                        data-req="Windows 10+ / macOS 11+ / Linux" data-ver="v0.17.1"
-                        data-site="https://www.marktext.cc/" data-dl="./downloads/marktext-setup.exe">
-                        <a href="javascript:void(0)"><img src="./img/tool-marktext.svg" alt="MarkText"></a>
-                        <h3>MarkText</h3>
-                        <p>Markdown 编辑器</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        const executeTypingAnimation = () => {
+          if (isDeleting) {
+            if (displayedText === '') {
+              setIsDeleting(false);
+              if (currentTextIndex === textArray.length - 1 && !loop) {
+                return;
+              }
 
-        <!-- 软件工具弹框 -->
-        <div class="tool-modal-overlay" id="toolModalOverlay">
-            <div class="tool-modal">
-                <button class="tool-modal-close" id="toolModalClose">&times;</button>
-                <h2 class="tool-modal-name" id="toolModalName"></h2>
-                <div class="tool-modal-body">
-                    <div class="tool-modal-section">
-                        <h4>软件介绍</h4>
-                        <p id="toolModalIntro"></p>
-                    </div>
-                    <div class="tool-modal-section">
-                        <h4>系统要求</h4>
-                        <p id="toolModalReq"></p>
-                    </div>
-                    <div class="tool-modal-section">
-                        <h4>版本号</h4>
-                        <p id="toolModalVer"></p>
-                    </div>
-                    <div class="tool-modal-section">
-                        <p class="tool-modal-site">官网网址：<a id="toolModalSite" href="#" target="_blank"
-                                rel="noopener"></a></p>
-                    </div>
-                </div>
-                <div class="tool-modal-action">
-                    <a class="tool-modal-download" id="toolModalDl" href="#" target="_blank" rel="noopener"
-                        download>点击下载</a>
-                </div>
-            </div>
-        </div>
+              if (onSentenceComplete) {
+                onSentenceComplete(textArray[currentTextIndex], currentTextIndex);
+              }
 
-        <!-- 版权 -->
-        <div class="footer">
-            <div class="wrapper">
-                <div class="left">
-                    <img src="./img/logo.svg" alt="码上成长">
-                    <p>码上成长致力于普及中国最好的教育，它与中国一流大学和机构合作提供在线课程。<br>
-                        @ 2017年XTCG Inc.保留所有权利。-沪ICP备15025210号</p>
-                    <a href="#">下载APP</a>
-                </div>
-                <div class="right">
-                    <dl>
-                        <dt>合作伙伴</dt>
-                        <dd><a href="#">合作机构</a></dd>
-                        <dd><a href="#">合作导师</a></dd>
-                    </dl>
-                    <dl>
-                        <dt>新手指南</dt>
-                        <dd><a href="#">如何注册</a></dd>
-                        <dd><a href="#">如何选课</a></dd>
-                        <dd><a href="#">如何拿到毕业证</a></dd>
-                        <dd><a href="#">学分是什么</a></dd>
-                        <dd><a href="#">考试未通过怎么办</a></dd>
-                    </dl>
-                    <dl>
-                        <dt>关于学成网</dt>
-                        <dd><a href="#">关于</a></dd>
-                        <dd><a href="#">管理团队</a></dd>
-                        <dd><a href="#">工作机会</a></dd>
-                        <dd><a href="#">客户服务</a></dd>
-                        <dd><a href="#">帮助</a></dd>
-                    </dl>
-                </div>
-            </div>
-        </div>
-
-    </div><!-- /.main-content -->
-
-    <script src="./js/main.js"></script>
-    <script type="text/babel">
-      const TextType = ({
-        text,
-        as: Component = 'div',
-        typingSpeed = 50,
-        initialDelay = 0,
-        pauseDuration = 2000,
-        deletingSpeed = 30,
-        loop = true,
-        className = '',
-        showCursor = true,
-        hideCursorWhileTyping = false,
-        cursorCharacter = '|',
-        cursorClassName = '',
-        cursorBlinkDuration = 0.5,
-        textColors = [],
-        variableSpeed,
-        onSentenceComplete,
-        startOnVisible = false,
-        reverseMode = false,
-        ...props
-      }) => {
-        const [displayedText, setDisplayedText] = React.useState('');
-        const [currentCharIndex, setCurrentCharIndex] = React.useState(0);
-        const [isDeleting, setIsDeleting] = React.useState(false);
-        const [currentTextIndex, setCurrentTextIndex] = React.useState(0);
-        const [isVisible, setIsVisible] = React.useState(!startOnVisible);
-        const cursorRef = React.useRef(null);
-        const containerRef = React.useRef(null);
-
-        const textArray = React.useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
-
-        const getRandomSpeed = React.useCallback(() => {
-          if (!variableSpeed) return typingSpeed;
-          const { min, max } = variableSpeed;
-          return Math.random() * (max - min) + min;
-        }, [variableSpeed, typingSpeed]);
-
-        const getCurrentTextColor = () => {
-          if (textColors.length === 0) return 'inherit';
-          return textColors[currentTextIndex % textColors.length];
+              setCurrentTextIndex(prev => (prev + 1) % textArray.length);
+              setCurrentCharIndex(0);
+              timeout = setTimeout(() => { }, pauseDuration);
+            } else {
+              timeout = setTimeout(() => {
+                setDisplayedText(prev => prev.slice(0, -1));
+              }, deletingSpeed);
+            }
+          } else {
+            if (currentCharIndex < processedText.length) {
+              timeout = setTimeout(
+                () => {
+                  setDisplayedText(prev => prev + processedText[currentCharIndex]);
+                  setCurrentCharIndex(prev => prev + 1);
+                },
+                variableSpeed ? getRandomSpeed() : typingSpeed
+              );
+            } else if (textArray.length >= 1) {
+              if (!loop && currentTextIndex === textArray.length - 1) return;
+              timeout = setTimeout(() => {
+                setIsDeleting(true);
+              }, pauseDuration);
+            }
+          }
         };
 
-        React.useEffect(() => {
-          if (!startOnVisible || !containerRef.current) return;
+        if (currentCharIndex === 0 && !isDeleting && displayedText === '') {
+          timeout = setTimeout(executeTypingAnimation, initialDelay);
+        } else {
+          executeTypingAnimation();
+        }
 
-          const observer = new IntersectionObserver(
-            entries => {
-              entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                  setIsVisible(true);
-                }
-              });
-            },
-            { threshold: 0.1 }
-          );
+        return () => clearTimeout(timeout);
+      }, [
+        currentCharIndex,
+        displayedText,
+        isDeleting,
+        typingSpeed,
+        deletingSpeed,
+        pauseDuration,
+        textArray,
+        currentTextIndex,
+        loop,
+        initialDelay,
+        isVisible,
+        reverseMode,
+        variableSpeed,
+        onSentenceComplete
+      ]);
 
-          observer.observe(containerRef.current);
-          return () => observer.disconnect();
-        }, [startOnVisible]);
+      const shouldHideCursor =
+        hideCursorWhileTyping && (currentCharIndex < textArray[currentTextIndex].length || isDeleting);
 
-        React.useEffect(() => {
-          if (showCursor && cursorRef.current) {
-            gsap.set(cursorRef.current, { opacity: 1 });
-            gsap.to(cursorRef.current, {
-              opacity: 0,
-              duration: cursorBlinkDuration,
-              repeat: -1,
-              yoyo: true,
-              ease: 'power2.inOut'
-            });
-          }
-        }, [showCursor, cursorBlinkDuration]);
-
-        React.useEffect(() => {
-          if (!isVisible) return;
-
-          let timeout;
-          const currentText = textArray[currentTextIndex];
-          const processedText = reverseMode ? currentText.split('').reverse().join('') : currentText;
-
-          const executeTypingAnimation = () => {
-            if (isDeleting) {
-              if (displayedText === '') {
-                setIsDeleting(false);
-                if (currentTextIndex === textArray.length - 1 && !loop) {
-                  return;
-                }
-
-                if (onSentenceComplete) {
-                  onSentenceComplete(textArray[currentTextIndex], currentTextIndex);
-                }
-
-                setCurrentTextIndex(prev => (prev + 1) % textArray.length);
-                setCurrentCharIndex(0);
-                timeout = setTimeout(() => {}, pauseDuration);
-              } else {
-                timeout = setTimeout(() => {
-                  setDisplayedText(prev => prev.slice(0, -1));
-                }, deletingSpeed);
-              }
-            } else {
-              if (currentCharIndex < processedText.length) {
-                timeout = setTimeout(
-                  () => {
-                    setDisplayedText(prev => prev + processedText[currentCharIndex]);
-                    setCurrentCharIndex(prev => prev + 1);
-                  },
-                  variableSpeed ? getRandomSpeed() : typingSpeed
-                );
-              } else if (textArray.length >= 1) {
-                if (!loop && currentTextIndex === textArray.length - 1) return;
-                timeout = setTimeout(() => {
-                  setIsDeleting(true);
-                }, pauseDuration);
-              }
-            }
-          };
-
-          if (currentCharIndex === 0 && !isDeleting && displayedText === '') {
-            timeout = setTimeout(executeTypingAnimation, initialDelay);
-          } else {
-            executeTypingAnimation();
-          }
-
-          return () => clearTimeout(timeout);
-        }, [
-          currentCharIndex,
-          displayedText,
-          isDeleting,
-          typingSpeed,
-          deletingSpeed,
-          pauseDuration,
-          textArray,
-          currentTextIndex,
-          loop,
-          initialDelay,
-          isVisible,
-          reverseMode,
-          variableSpeed,
-          onSentenceComplete
-        ]);
-
-        const shouldHideCursor =
-          hideCursorWhileTyping && (currentCharIndex < textArray[currentTextIndex].length || isDeleting);
-
-        return React.createElement(
-          Component,
-          {
-            ref: containerRef,
-            className: `text-type ${className}`,
-            ...props
-          },
-          React.createElement('span', { className: 'text-type__content', style: { color: getCurrentTextColor() || 'inherit' } }, displayedText),
-          showCursor && React.createElement(
-            'span',
-            {
-              ref: cursorRef,
-              className: `text-type__cursor ${cursorClassName} ${shouldHideCursor ? 'text-type__cursor--hidden' : ''}`
-            },
-            cursorCharacter
-          )
-        );
-      };
-    </script>
-    <script type="text/babel">
-      // 渲染TextType组件到banner中央
-      const bannerCenter = document.getElementById('banner-center');
-      if (bannerCenter) {
-        ReactDOM.createRoot(bannerCenter).render(
-          React.createElement(TextType, {
-            text: ["欢迎来到码上成长", "学习编程", "掌握技术", "工具下载"],
-            typingSpeed: 100,
-            pauseDuration: 2000,
-            showCursor: true,
-            cursorCharacter: "|",
-            style: { fontSize: '56px', fontWeight: 'bold', color: 'white', textShadow: '0 2px 8px rgba(0,0,0,0.3)' }
-          })
-        );
-      }
-    </script>
-    <script type="text/babel">
-      const PixelBlast = ({
-        pixelSize = 6,
-        color = '#B497CF',
-        patternScale = 3,
-        patternDensity = 1.2,
-        pixelSizeJitter = 0.5,
-        enableRipples = true,
-        rippleSpeed = 0.4,
-        rippleThickness = 0.12,
-        rippleIntensityScale = 1.5,
-        speed = 0.6,
-        edgeFade = 0.25,
-        transparent = true,
-        variant = 'circle',
-        ...rest
-      }) => {
-        const containerRef = React.useRef(null);
-
-        React.useEffect(() => {
-          const container = containerRef.current;
-          if (!container) return;
-
-          const canvas = document.createElement('canvas');
-          canvas.style.width = '100%';
-          canvas.style.height = '100%';
-          container.appendChild(canvas);
-          const ctx = canvas.getContext('2d');
-
-          let animId;
-          let time = 0;
-          const ripples = [];
-
-          function hexToRgb(hex) {
-            const r = parseInt(hex.slice(1, 3), 16);
-            const g = parseInt(hex.slice(3, 5), 16);
-            const b = parseInt(hex.slice(5, 7), 16);
-            return { r, g, b };
-          }
-
-          const baseColor = hexToRgb(color);
-
-          function resize() {
-            canvas.width = container.clientWidth * Math.min(window.devicePixelRatio, 2);
-            canvas.height = container.clientHeight * Math.min(window.devicePixelRatio, 2);
-          }
-
-          function hash(x, y) {
-            let h = x * 374761393 + y * 668265263;
-            h = (h ^ (h >> 13)) * 1274126177;
-            return ((h ^ (h >> 16)) & 0x7fffffff) / 0x7fffffff;
-          }
-
-          function noise2d(x, y) {
-            const ix = Math.floor(x), iy = Math.floor(y);
-            const fx = x - ix, fy = y - iy;
-            const sx = fx * fx * (3 - 2 * fx);
-            const sy = fy * fy * (3 - 2 * fy);
-            const n00 = hash(ix, iy);
-            const n10 = hash(ix + 1, iy);
-            const n01 = hash(ix, iy + 1);
-            const n11 = hash(ix + 1, iy + 1);
-            return (n00 * (1 - sx) + n10 * sx) * (1 - sy) + (n01 * (1 - sx) + n11 * sx) * sy;
-          }
-
-          function fbm(x, y, t) {
-            let val = 0, amp = 1, freq = 1;
-            for (let i = 0; i < 5; i++) {
-              val += amp * noise2d(x * freq + t * 0.03, y * freq + t * 0.02);
-              freq *= 1.25;
-              amp *= 0.8;
-            }
-            return val;
-          }
-
-          function draw() {
-            time += 0.016 * speed;
-            const w = canvas.width, h = canvas.height;
-            ctx.clearRect(0, 0, w, h);
-
-            const ps = pixelSize * Math.min(window.devicePixelRatio, 2);
-            const cols = Math.ceil(w / ps);
-            const rows = Math.ceil(h / ps);
-            const aspectRatio = w / h;
-
-            for (let row = 0; row < rows; row++) {
-              for (let col = 0; col < cols; col++) {
-                const px = col * ps + ps / 2;
-                const py = row * ps + ps / 2;
-
-                const nx = (col / cols) * patternScale;
-                const ny = (row / rows) * patternScale;
-                let feed = fbm(nx, ny, time) * 0.5 - 0.5 + (patternDensity - 0.5) * 0.35;
-
-                if (enableRipples) {
-                  for (const rip of ripples) {
-                    const rx = rip.x / ps;
-                    const ry = rip.y / ps;
-                    const dx = col - rx;
-                    const dy = row - ry;
-                    const dist = Math.sqrt(dx * dx + dy * dy) * ps / w;
-                    const waveR = rippleSpeed * rip.age;
-                    const ring = Math.exp(-Math.pow((dist - waveR) / rippleThickness, 2.0));
-                    const atten = Math.exp(-1.0 * rip.age) * Math.exp(-10.0 * dist);
-                    feed = Math.max(feed, ring * atten * rippleIntensityScale);
-                  }
-                }
-
-                const bayer = ((col & 1) * 2 + (row & 1)) * 0.25 - 0.5;
-                const bw = feed + bayer > 0.5 ? 1 : 0;
-
-                if (bw <= 0) continue;
-
-                const jitter = pixelSizeJitter > 0 ? 1 + (hash(col, row) - 0.5) * pixelSizeJitter : 1;
-                const coverage = bw * jitter;
-
-                if (edgeFade > 0) {
-                  const normX = col / cols, normY = row / rows;
-                  const edge = Math.min(normX, normY, 1 - normX, 1 - normY);
-                  if (edge < edgeFade) continue;
-                }
-
-                const alpha = Math.min(coverage, 1);
-                const r = baseColor.r, g = baseColor.g, b = baseColor.b;
-                const flicker = 0.7 + 0.3 * Math.sin(time * 3 + hash(col, row) * 6.28);
-                const finalAlpha = alpha * flicker;
-
-                ctx.fillStyle = `rgba(${r},${g},${b},${finalAlpha})`;
-
-                if (variant === 'circle') {
-                  const radius = ps * 0.4 * coverage;
-                  ctx.beginPath();
-                  ctx.arc(px, py, radius, 0, Math.PI * 2);
-                  ctx.fill();
-                } else if (variant === 'diamond') {
-                  const s = ps * 0.4 * coverage;
-                  ctx.save();
-                  ctx.translate(px, py);
-                  ctx.rotate(Math.PI / 4);
-                  ctx.fillRect(-s, -s, s * 2, s * 2);
-                  ctx.restore();
-                } else if (variant === 'triangle') {
-                  const s = ps * 0.5 * coverage;
-                  ctx.beginPath();
-                  ctx.moveTo(px, py - s);
-                  ctx.lineTo(px - s, py + s);
-                  ctx.lineTo(px + s, py + s);
-                  ctx.closePath();
-                  ctx.fill();
-                } else {
-                  const s = ps * 0.45 * coverage;
-                  ctx.fillRect(px - s, py - s, s * 2, s * 2);
-                }
-              }
-            }
-
-            for (let i = ripples.length - 1; i >= 0; i--) {
-              ripples[i].age += 0.016 * speed;
-              if (ripples[i].age > 3) ripples.splice(i, 1);
-            }
-
-            animId = requestAnimationFrame(draw);
-          }
-
-          function handleClick(e) {
-            if (!enableRipples) return;
-            const rect = canvas.getBoundingClientRect();
-            const scaleX = canvas.width / rect.width;
-            const scaleY = canvas.height / rect.height;
-            ripples.push({
-              x: (e.clientX - rect.left) * scaleX,
-              y: (e.clientY - rect.top) * scaleY,
-              age: 0
-            });
-          }
-
-          resize();
-          draw();
-          canvas.addEventListener('click', handleClick);
-          window.addEventListener('resize', resize);
-
-          return () => {
-            cancelAnimationFrame(animId);
-            canvas.removeEventListener('click', handleClick);
-            window.removeEventListener('resize', resize);
-            if (container.contains(canvas)) container.removeChild(canvas);
-          };
-        }, [pixelSize, color, patternScale, patternDensity, pixelSizeJitter, enableRipples, rippleSpeed, rippleThickness, rippleIntensityScale, speed, edgeFade, transparent, variant]);
-
-        return React.createElement('div', {
+      return React.createElement(
+        Component,
+        {
           ref: containerRef,
-          className: 'pixel-blast-container',
-          style: { width: '100%', height: '100%', position: 'relative', overflow: 'hidden' },
-          ...rest
-        });
-      };
-    </script>
-    <script type="text/babel">
-      const galaxyBackground = document.getElementById('galaxy-background');
-      if (galaxyBackground) {
-        ReactDOM.createRoot(galaxyBackground).render(
-          React.createElement(PixelBlast, {
-            variant: 'circle',
-            pixelSize: 8,
-            color: '#B497CF',
-            patternScale: 1.5,
-            patternDensity: 1.2,
-            pixelSizeJitter: 0.5,
-            enableRipples: true,
-            rippleSpeed: 0.4,
-            rippleThickness: 0.12,
-            rippleIntensityScale: 1.5,
-            speed: 0.6,
-            edgeFade: 0.0,
-            transparent: true
-          })
-        );
-      }
-    </script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        gsap.registerPlugin(ScrollTrigger);
-        const boxes = document.querySelectorAll('.box');
-        boxes.forEach(box => {
-          const cards = box.querySelectorAll('.content ul li');
-          cards.forEach((card, index) => {
-            gsap.from(card, {
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 80%',
-                toggleActions: 'play none none none'
-              },
-              opacity: 0,
-              y: 50,
-              duration: 0.8,
-              delay: index * 0.3,
-              ease: 'power2.out',
-              clearProps: "all"
-            });
+          className: `text-type ${className}`,
+          ...props
+        },
+        React.createElement('span', { className: 'text-type__content', style: { color: getCurrentTextColor() || 'inherit' } }, displayedText),
+        showCursor && React.createElement(
+          'span',
+          {
+            ref: cursorRef,
+            className: `text-type__cursor ${cursorClassName} ${shouldHideCursor ? 'text-type__cursor--hidden' : ''}`
+          },
+          cursorCharacter
+        )
+      );
+    };
+  </script>
+  <script type="text/babel">
+    // 渲染TextType组件到banner中央
+    const bannerCenter = document.getElementById('banner-center');
+    if (bannerCenter) {
+      ReactDOM.createRoot(bannerCenter).render(
+        React.createElement(TextType, {
+          text: ["欢迎来到码上成长", "学习编程", "掌握技术", "工具下载"],
+          typingSpeed: 100,
+          pauseDuration: 2000,
+          showCursor: true,
+          cursorCharacter: "|",
+          style: { fontSize: '56px', fontWeight: 'bold', color: 'white', textShadow: '0 2px 8px rgba(0,0,0,0.3)' }
+        })
+      );
+    }
+  </script>
+  <script type="text/babel">
+    const PixelBlast = ({
+      pixelSize = 6,
+      color = '#B497CF',
+      patternScale = 3,
+      patternDensity = 1.2,
+      pixelSizeJitter = 0.5,
+      enableRipples = true,
+      rippleSpeed = 0.4,
+      rippleThickness = 0.12,
+      rippleIntensityScale = 1.5,
+      speed = 0.6,
+      edgeFade = 0.25,
+      transparent = true,
+      variant = 'circle',
+      ...rest
+    }) => {
+      const containerRef = React.useRef(null);
+
+      React.useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
+
+        const canvas = document.createElement('canvas');
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        container.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+
+        let animId;
+        let time = 0;
+        const ripples = [];
+
+        function hexToRgb(hex) {
+          const r = parseInt(hex.slice(1, 3), 16);
+          const g = parseInt(hex.slice(3, 5), 16);
+          const b = parseInt(hex.slice(5, 7), 16);
+          return { r, g, b };
+        }
+
+        const baseColor = hexToRgb(color);
+
+        function resize() {
+          canvas.width = container.clientWidth * Math.min(window.devicePixelRatio, 2);
+          canvas.height = container.clientHeight * Math.min(window.devicePixelRatio, 2);
+        }
+
+        function hash(x, y) {
+          let h = x * 374761393 + y * 668265263;
+          h = (h ^ (h >> 13)) * 1274126177;
+          return ((h ^ (h >> 16)) & 0x7fffffff) / 0x7fffffff;
+        }
+
+        function noise2d(x, y) {
+          const ix = Math.floor(x), iy = Math.floor(y);
+          const fx = x - ix, fy = y - iy;
+          const sx = fx * fx * (3 - 2 * fx);
+          const sy = fy * fy * (3 - 2 * fy);
+          const n00 = hash(ix, iy);
+          const n10 = hash(ix + 1, iy);
+          const n01 = hash(ix, iy + 1);
+          const n11 = hash(ix + 1, iy + 1);
+          return (n00 * (1 - sx) + n10 * sx) * (1 - sy) + (n01 * (1 - sx) + n11 * sx) * sy;
+        }
+
+        function fbm(x, y, t) {
+          let val = 0, amp = 1, freq = 1;
+          for (let i = 0; i < 5; i++) {
+            val += amp * noise2d(x * freq + t * 0.03, y * freq + t * 0.02);
+            freq *= 1.25;
+            amp *= 0.8;
+          }
+          return val;
+        }
+
+        function draw() {
+          time += 0.016 * speed;
+          const w = canvas.width, h = canvas.height;
+          ctx.clearRect(0, 0, w, h);
+
+          const ps = pixelSize * Math.min(window.devicePixelRatio, 2);
+          const cols = Math.ceil(w / ps);
+          const rows = Math.ceil(h / ps);
+          const aspectRatio = w / h;
+
+          for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+              const px = col * ps + ps / 2;
+              const py = row * ps + ps / 2;
+
+              const nx = (col / cols) * patternScale;
+              const ny = (row / rows) * patternScale;
+              let feed = fbm(nx, ny, time) * 0.5 - 0.5 + (patternDensity - 0.5) * 0.35;
+
+              if (enableRipples) {
+                for (const rip of ripples) {
+                  const rx = rip.x / ps;
+                  const ry = rip.y / ps;
+                  const dx = col - rx;
+                  const dy = row - ry;
+                  const dist = Math.sqrt(dx * dx + dy * dy) * ps / w;
+                  const waveR = rippleSpeed * rip.age;
+                  const ring = Math.exp(-Math.pow((dist - waveR) / rippleThickness, 2.0));
+                  const atten = Math.exp(-1.0 * rip.age) * Math.exp(-10.0 * dist);
+                  feed = Math.max(feed, ring * atten * rippleIntensityScale);
+                }
+              }
+
+              const bayer = ((col & 1) * 2 + (row & 1)) * 0.25 - 0.5;
+              const bw = feed + bayer > 0.5 ? 1 : 0;
+
+              if (bw <= 0) continue;
+
+              const jitter = pixelSizeJitter > 0 ? 1 + (hash(col, row) - 0.5) * pixelSizeJitter : 1;
+              const coverage = bw * jitter;
+
+              if (edgeFade > 0) {
+                const normX = col / cols, normY = row / rows;
+                const edge = Math.min(normX, normY, 1 - normX, 1 - normY);
+                if (edge < edgeFade) continue;
+              }
+
+              const alpha = Math.min(coverage, 1);
+              const r = baseColor.r, g = baseColor.g, b = baseColor.b;
+              const flicker = 0.7 + 0.3 * Math.sin(time * 3 + hash(col, row) * 6.28);
+              const finalAlpha = alpha * flicker;
+
+              ctx.fillStyle = `rgba(${r},${g},${b},${finalAlpha})`;
+
+              if (variant === 'circle') {
+                const radius = ps * 0.4 * coverage;
+                ctx.beginPath();
+                ctx.arc(px, py, radius, 0, Math.PI * 2);
+                ctx.fill();
+              } else if (variant === 'diamond') {
+                const s = ps * 0.4 * coverage;
+                ctx.save();
+                ctx.translate(px, py);
+                ctx.rotate(Math.PI / 4);
+                ctx.fillRect(-s, -s, s * 2, s * 2);
+                ctx.restore();
+              } else if (variant === 'triangle') {
+                const s = ps * 0.5 * coverage;
+                ctx.beginPath();
+                ctx.moveTo(px, py - s);
+                ctx.lineTo(px - s, py + s);
+                ctx.lineTo(px + s, py + s);
+                ctx.closePath();
+                ctx.fill();
+              } else {
+                const s = ps * 0.45 * coverage;
+                ctx.fillRect(px - s, py - s, s * 2, s * 2);
+              }
+            }
+          }
+
+          for (let i = ripples.length - 1; i >= 0; i--) {
+            ripples[i].age += 0.016 * speed;
+            if (ripples[i].age > 3) ripples.splice(i, 1);
+          }
+
+          animId = requestAnimationFrame(draw);
+        }
+
+        function handleClick(e) {
+          if (!enableRipples) return;
+          const rect = canvas.getBoundingClientRect();
+          const scaleX = canvas.width / rect.width;
+          const scaleY = canvas.height / rect.height;
+          ripples.push({
+            x: (e.clientX - rect.left) * scaleX,
+            y: (e.clientY - rect.top) * scaleY,
+            age: 0
+          });
+        }
+
+        resize();
+        draw();
+        canvas.addEventListener('click', handleClick);
+        window.addEventListener('resize', resize);
+
+        return () => {
+          cancelAnimationFrame(animId);
+          canvas.removeEventListener('click', handleClick);
+          window.removeEventListener('resize', resize);
+          if (container.contains(canvas)) container.removeChild(canvas);
+        };
+      }, [pixelSize, color, patternScale, patternDensity, pixelSizeJitter, enableRipples, rippleSpeed, rippleThickness, rippleIntensityScale, speed, edgeFade, transparent, variant]);
+
+      return React.createElement('div', {
+        ref: containerRef,
+        className: 'pixel-blast-container',
+        style: { width: '100%', height: '100%', position: 'relative', overflow: 'hidden' },
+        ...rest
+      });
+    };
+  </script>
+  <script type="text/babel">
+    const galaxyBackground = document.getElementById('galaxy-background');
+    if (galaxyBackground) {
+      ReactDOM.createRoot(galaxyBackground).render(
+        React.createElement(PixelBlast, {
+          variant: 'circle',
+          pixelSize: 8,
+          color: '#B497CF',
+          patternScale: 1.5,
+          patternDensity: 1.2,
+          pixelSizeJitter: 0.5,
+          enableRipples: true,
+          rippleSpeed: 0.4,
+          rippleThickness: 0.12,
+          rippleIntensityScale: 1.5,
+          speed: 0.6,
+          edgeFade: 0.0,
+          transparent: true
+        })
+      );
+    }
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      gsap.registerPlugin(ScrollTrigger);
+      const boxes = document.querySelectorAll('.box');
+      boxes.forEach(box => {
+        const cards = box.querySelectorAll('.content ul li');
+        cards.forEach((card, index) => {
+          gsap.from(card, {
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 80%',
+              toggleActions: 'play none none none'
+            },
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            delay: index * 0.3,
+            ease: 'power2.out',
+            clearProps: "all"
           });
         });
       });
-    </script>
+    });
+  </script>
 
-    <!-- Dify AI 助手 -->
-    <script>
-      window.difyChatbotConfig = {
-        token: 'SkaZbL3jHILHosS6',
-        baseUrl: 'https://udify.app',
-      }
-    </script>
-    <script
-      src="https://udify.app/embed.min.js"
-      id="SkaZbL3jHILHosS6"
-      defer>
-    </script>
-    <script>
-      window.addEventListener('load', function() {
-        var checkBtn = setInterval(function() {
-          var difyBtn = document.querySelector('#dify-chatbot-bubble-button');
-          var difyWindow = document.querySelector('#dify-chatbot-bubble-window');
-          if (difyBtn && difyWindow) {
-            difyBtn.setAttribute('title', '网站小助手');
-
-            var style = document.createElement('style');
-            style.textContent = '#dify-chatbot-bubble-window.dify-opening { animation: dify-open-anim 0.6s ease forwards; } @keyframes dify-open-anim { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }';
-            document.head.appendChild(style);
-
-            var observer = new MutationObserver(function() {
-              if (difyWindow.style.display !== 'none' && difyWindow.offsetHeight > 0) {
-                difyWindow.classList.remove('dify-opening');
-                void difyWindow.offsetWidth;
-                difyWindow.classList.add('dify-opening');
-              }
-            });
-            observer.observe(difyWindow, { attributes: true, attributeFilter: ['style'] });
-
-            clearInterval(checkBtn);
-          }
-        }, 500);
-      });
-    </script>
-    <style>
-      #dify-chatbot-bubble-button {
-        opacity: 0 !important;
-        pointer-events: none !important;
-      }
-      #dify-chatbot-bubble-window {
-        width: 22rem !important;
-        height: 36rem !important;
-        position: fixed !important;
-        bottom: 100px !important;
-        right: 22px !important;
-        left: auto !important;
-        top: auto !important;
-        transition: opacity 0.6s ease, transform 0.6s ease !important;
-        z-index: 9999 !important;
-      }
-      .chat-close-btn {
-        position: fixed;
-        top: calc(100vh - 100px - 36rem + 8px);
-        right: calc(22px + 8px);
-        width: 36px;
-        height: 36px;
-        background: rgb(17, 156, 233);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        z-index: 10000;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        transition: background 0.2s;
-      }
-      .chat-close-btn.show {
-        display: flex;
-        animation: closeBtnFadeIn 0.6s ease forwards;
-      }
-      @keyframes closeBtnFadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-      .chat-close-btn:hover {
-        background: linear-gradient(135deg, #1557b0, #339af0);
-      }
-      .chat-close-btn.show {
-        display: flex;
-      }
-      .custom-chatbot-btn {
-        position: fixed;
-        bottom: 90px;
-        right: 22px;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        transition: transform 0.3s ease;
-        z-index: 1001;
-        overflow: hidden;
-        border: none;
-      }
-      .custom-chatbot-btn:hover {
-        transform: scale(1.1);
-      }
-      .custom-chatbot-btn img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .chatbot-tooltip {
-        position: fixed;
-        bottom: 152px;
-        right: 16px;
-        background: var(--color-bg-white);
-        color: var(--color-text);
-        padding: 12px 16px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        font-size: 14px;
-        z-index: 1000;
-        opacity: 0;
-        transform: translateY(10px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-        max-width: 260px;
-        line-height: 1.5;
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-      }
-      .chatbot-tooltip.show {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .chatbot-tooltip::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        right: 20px;
-        width: 0;
-        height: 0;
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-top: 8px solid var(--color-bg-white);
-      }
-      .chatbot-avatar {
-        width: 40px;
-        height: 40px;
-        flex-shrink: 0;
-      }
-    </style>
-    <div class="custom-chatbot-btn" id="customChatbotBtn">
-      <img src="./img/chatbot-avatar-holo.svg" alt="Tony">
-    </div>
-    <button class="chat-close-btn" id="chatCloseBtn">&times;</button>
-    <div class="chatbot-tooltip" id="chatbotTooltip">
-      <img class="chatbot-avatar" src="./img/chatbot-avatar-holo.svg" alt="Tony">
-      <div class="chatbot-tooltip-text" id="chatbotTooltipText"></div>
-    </div>
-    <script type="text/babel">
-      var tooltipTextEl = document.getElementById('chatbotTooltipText');
-      var tooltipEl = document.getElementById('chatbotTooltip');
-      var customBtn = document.getElementById('customChatbotBtn');
-
-      if (tooltipTextEl) {
-        setTimeout(function() {
-          ReactDOM.createRoot(tooltipTextEl).render(
-            React.createElement(TextType, {
-              text: ["我是网站小助手Tony，点击开始聊天"],
-              typingSpeed: 80,
-              loop: false,
-              showCursor: true,
-              cursorCharacter: "|"
-            })
-          );
-          tooltipEl.classList.add('show');
-        }, 1000);
-      }
-
-      var chatOpen = false;
-      var closeBtn = document.getElementById('chatCloseBtn');
-
-      function toggleChat() {
+  <!-- Dify AI 助手 -->
+  <script>
+    window.difyChatbotConfig = {
+      token: 'SkaZbL3jHILHosS6',
+      baseUrl: 'https://udify.app',
+    }
+  </script>
+  <script src="https://udify.app/embed.min.js" id="SkaZbL3jHILHosS6" defer>
+  </script>
+  <script>
+    window.addEventListener('load', function () {
+      var checkBtn = setInterval(function () {
+        var difyBtn = document.querySelector('#dify-chatbot-bubble-button');
         var difyWindow = document.querySelector('#dify-chatbot-bubble-window');
-        if (difyWindow) {
-          chatOpen = !chatOpen;
-          if (chatOpen) {
-            difyWindow.style.display = 'block';
-            if (closeBtn) {
-              setTimeout(function() {
-                closeBtn.classList.add('show');
-              }, 600);
+        if (difyBtn && difyWindow) {
+          difyBtn.setAttribute('title', '网站小助手');
+
+          var style = document.createElement('style');
+          style.textContent = '#dify-chatbot-bubble-window.dify-opening { animation: dify-open-anim 0.6s ease forwards; } @keyframes dify-open-anim { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }';
+          document.head.appendChild(style);
+
+          var observer = new MutationObserver(function () {
+            if (difyWindow.style.display !== 'none' && difyWindow.offsetHeight > 0) {
+              difyWindow.classList.remove('dify-opening');
+              void difyWindow.offsetWidth;
+              difyWindow.classList.add('dify-opening');
             }
-          } else {
-            difyWindow.style.display = 'none';
-            if (closeBtn) closeBtn.classList.remove('show');
-          }
+          });
+          observer.observe(difyWindow, { attributes: true, attributeFilter: ['style'] });
+
+          clearInterval(checkBtn);
         }
+      }, 500);
+    });
+  </script>
+  <style>
+    #dify-chatbot-bubble-button {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    #dify-chatbot-bubble-window {
+      width: 22rem !important;
+      height: 36rem !important;
+      position: fixed !important;
+      bottom: 100px !important;
+      right: 22px !important;
+      left: auto !important;
+      top: auto !important;
+      transition: opacity 0.6s ease, transform 0.6s ease !important;
+      z-index: 9999 !important;
+    }
+
+    .chat-close-btn {
+      position: fixed;
+      top: calc(100vh - 100px - 36rem + 8px);
+      right: calc(22px + 8px);
+      width: 36px;
+      height: 36px;
+      background: rgb(17, 156, 233);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      transition: background 0.2s;
+    }
+
+    .chat-close-btn.show {
+      display: flex;
+      animation: closeBtnFadeIn 0.6s ease forwards;
+    }
+
+    @keyframes closeBtnFadeIn {
+      from {
+        opacity: 0;
       }
 
-      function closeChat() {
-        chatOpen = false;
-        var difyWindow = document.querySelector('#dify-chatbot-bubble-window');
-        if (difyWindow) {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .chat-close-btn:hover {
+      background: linear-gradient(135deg, #1557b0, #339af0);
+    }
+
+    .chat-close-btn.show {
+      display: flex;
+    }
+
+    .custom-chatbot-btn {
+      position: fixed;
+      bottom: 90px;
+      right: 22px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+      z-index: 1001;
+      overflow: hidden;
+      border: none;
+    }
+
+    .custom-chatbot-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .custom-chatbot-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .chatbot-tooltip {
+      position: fixed;
+      bottom: 152px;
+      right: 16px;
+      background: var(--color-bg-white);
+      color: var(--color-text);
+      padding: 12px 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      font-size: 14px;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      max-width: 260px;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .chatbot-tooltip.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .chatbot-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      right: 20px;
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid var(--color-bg-white);
+    }
+
+    .chatbot-avatar {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+  </style>
+  <div class="custom-chatbot-btn" id="customChatbotBtn">
+    <img src="./img/chatbot-avatar-holo.svg" alt="Tony">
+  </div>
+  <button class="chat-close-btn" id="chatCloseBtn">&times;</button>
+  <div class="chatbot-tooltip" id="chatbotTooltip">
+    <img class="chatbot-avatar" src="./img/chatbot-avatar-holo.svg" alt="Tony">
+    <div class="chatbot-tooltip-text" id="chatbotTooltipText"></div>
+  </div>
+  <script type="text/babel">
+    var tooltipTextEl = document.getElementById('chatbotTooltipText');
+    var tooltipEl = document.getElementById('chatbotTooltip');
+    var customBtn = document.getElementById('customChatbotBtn');
+
+    if (tooltipTextEl) {
+      setTimeout(function () {
+        ReactDOM.createRoot(tooltipTextEl).render(
+          React.createElement(TextType, {
+            text: ["我是网站小助手Tony，点击开始聊天"],
+            typingSpeed: 80,
+            loop: false,
+            showCursor: true,
+            cursorCharacter: "|"
+          })
+        );
+        tooltipEl.classList.add('show');
+      }, 1000);
+    }
+
+    var chatOpen = false;
+    var closeBtn = document.getElementById('chatCloseBtn');
+
+    function toggleChat() {
+      var difyWindow = document.querySelector('#dify-chatbot-bubble-window');
+      if (difyWindow) {
+        chatOpen = !chatOpen;
+        if (chatOpen) {
+          difyWindow.style.display = 'block';
+          if (closeBtn) {
+            setTimeout(function () {
+              closeBtn.classList.add('show');
+            }, 600);
+          }
+        } else {
           difyWindow.style.display = 'none';
+          if (closeBtn) closeBtn.classList.remove('show');
         }
-        if (closeBtn) closeBtn.classList.remove('show');
       }
+    }
 
-      if (customBtn) {
-        customBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          if (tooltipEl) {
-            tooltipEl.classList.remove('show');
-          }
-          toggleChat();
-        });
+    function closeChat() {
+      chatOpen = false;
+      var difyWindow = document.querySelector('#dify-chatbot-bubble-window');
+      if (difyWindow) {
+        difyWindow.style.display = 'none';
       }
+      if (closeBtn) closeBtn.classList.remove('show');
+    }
 
-      if (closeBtn) {
-        closeBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          closeChat();
-        });
-      }
-
-      document.addEventListener('click', function(e) {
-        if (!chatOpen) return;
-        var difyWindow = document.querySelector('#dify-chatbot-bubble-window');
-        var isInsideChat = difyWindow && difyWindow.contains(e.target);
-        var isInsideBtn = customBtn && customBtn.contains(e.target);
-        var isInsideClose = closeBtn && closeBtn.contains(e.target);
-        if (!isInsideChat && !isInsideBtn && !isInsideClose) {
-          closeChat();
+    if (customBtn) {
+      customBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (tooltipEl) {
+          tooltipEl.classList.remove('show');
         }
+        toggleChat();
       });
+    }
 
-    </script>
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        closeChat();
+      });
+    }
+
+    document.addEventListener('click', function (e) {
+      if (!chatOpen) return;
+      var difyWindow = document.querySelector('#dify-chatbot-bubble-window');
+      var isInsideChat = difyWindow && difyWindow.contains(e.target);
+      var isInsideBtn = customBtn && customBtn.contains(e.target);
+      var isInsideClose = closeBtn && closeBtn.contains(e.target);
+      if (!isInsideChat && !isInsideBtn && !isInsideClose) {
+        closeChat();
+      }
+    });
+
+  </script>
+
+  <!-- 登录/注册弹窗 -->
+  <div id="authModal" class="auth-modal" style="display:none;">
+    <div class="auth-overlay" onclick="hideAuthModal()"></div>
+    <div class="auth-box">
+      <button class="auth-close" onclick="hideAuthModal()">&times;</button>
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchAuthTab('login')">登录</button>
+        <button class="auth-tab" onclick="switchAuthTab('register')">注册</button>
+      </div>
+      <form id="loginForm" class="auth-form" onsubmit="return handleLogin(event)">
+        <input type="text" name="userName" placeholder="用户名" required>
+        <input type="password" name="password" placeholder="密码" required>
+        <div class="captcha-row">
+          <input type="text" name="code" placeholder="验证码" required>
+          <img id="captchaImg" src="" alt="验证码" onclick="loadCaptcha()" style="cursor:pointer;height:38px;border-radius:6px;">
+        </div>
+        <button type="submit">登录</button>
+      </form>
+      <form id="registerForm" class="auth-form" style="display:none;" onsubmit="return handleRegister(event)">
+        <input type="text" name="userName" placeholder="用户名" required>
+        <input type="password" name="password" placeholder="密码" required>
+        <div class="captcha-row" id="regCaptchaRow">
+          <input type="text" name="code" placeholder="验证码" required>
+          <img id="regCaptchaImg" src="" alt="验证码" onclick="loadRegCaptcha()" style="cursor:pointer;height:38px;border-radius:6px;">
+        </div>
+        <button type="submit">注册</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    var captchaUuid = '';
+    var captchaEnabled = true;
+    var regCaptchaUuid = '';
+
+    function loadCaptcha() {
+      apiGet('/captchaImage').then(function(res) {
+        captchaEnabled = res.captchaEnabled !== false;
+        if (captchaEnabled) {
+          captchaUuid = res.uuid;
+          document.getElementById('captchaImg').src = 'data:image/gif;base64,' + res.img;
+        }
+      }).catch(function(err) {
+        console.error('加载验证码失败:', err);
+        captchaEnabled = false;
+        document.querySelector('#loginForm .captcha-row').style.display = 'none';
+      });
+    }
+
+    function loadRegCaptcha() {
+      apiGet('/captchaImage').then(function(res) {
+        if (res.captchaEnabled !== false) {
+          regCaptchaUuid = res.uuid;
+          document.getElementById('regCaptchaImg').src = 'data:image/gif;base64,' + res.img;
+        }
+      }).catch(function(err) {
+        console.error('加载验证码失败:', err);
+      });
+    }
+
+    function showAuthModal() {
+      if (isLoggedIn()) return;
+      document.getElementById('authModal').style.display = 'block';
+      document.querySelector('#loginForm .captcha-row').style.display = 'flex';
+      loadCaptcha();
+      loadRegCaptcha();
+    }
+
+    function hideAuthModal() {
+      document.getElementById('authModal').style.display = 'none';
+    }
+
+    function switchAuthTab(tab) {
+      var tabs = document.querySelectorAll('.auth-tab');
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      if (tab === 'login') {
+        tabs[0].classList.add('active');
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('registerForm').style.display = 'none';
+        loadCaptcha();
+      } else {
+        tabs[1].classList.add('active');
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'block';
+        loadRegCaptcha();
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      var form = e.target;
+      var data = {
+        username: form.userName.value,
+        password: form.password.value
+      };
+      if (captchaEnabled) {
+        data.uuid = captchaUuid;
+        data.code = form.code.value;
+      }
+      apiPost('/login', data).then(function(res) {
+        console.log('登录返回:', res);
+        if (res.code === 200) {
+          setToken(res.token);
+          setUserName(data.username);
+          hideAuthModal();
+          updateUserDisplay();
+          if (typeof initFavorites === 'function') {
+            initFavorites();
+          } else {
+            loadFavoritesFromServer();
+          }
+          showToast('登录成功');
+        } else {
+          alert(res.msg || '登录失败');
+          loadCaptcha();
+        }
+      }).catch(function(err) {
+        console.error('登录错误:', err);
+        alert('登录请求失败');
+        loadCaptcha();
+      });
+      return false;
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      var form = e.target;
+      var data = {
+        username: form.userName.value,
+        password: form.password.value
+      };
+      if (regCaptchaUuid) {
+        data.uuid = regCaptchaUuid;
+        data.code = form.code.value;
+      }
+      apiPost('/register', data).then(function(res) {
+        if (res.code === 200) {
+          alert('注册成功，请登录');
+          switchAuthTab('login');
+        } else {
+          alert(res.msg || '注册失败');
+          loadRegCaptcha();
+        }
+      }).catch(function() {
+        alert('注册请求失败');
+        loadRegCaptcha();
+      });
+      return false;
+    }
+
+    function updateUserDisplay() {
+      var el = document.getElementById('userNameDisplay');
+      if (isLoggedIn()) {
+        el.textContent = getUserName();
+        el.onclick = function() { logout(); };
+        el.title = '点击退出登录';
+      } else {
+        el.textContent = '登录';
+        el.onclick = showAuthModal;
+        el.title = '';
+      }
+    }
+
+    function logout() {
+      if (!confirm('确定退出登录？')) return;
+      apiPost('/logout').finally(function() {
+        clearToken();
+        localStorage.removeItem('userName');
+        updateUserDisplay();
+        initFavorites();
+      });
+    }
+
+    updateUserDisplay();
+  </script>
+
 </body>
 
 </html>

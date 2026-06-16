@@ -231,37 +231,42 @@ document.addEventListener('DOMContentLoaded', function () {
     'agent-andrew': '吴恩达讲Agent'
   };
 
+  // 课程ID到数据库ID的映射
+  var courseIdMap = {
+    'html-basic': 100, 'html-advanced': 101,
+    'css-basic': 102, 'css-advanced': 103,
+    'javascript-basic': 104,
+    'java-basic': 105, 'java-advanced': 106,
+    'python-basic': 107, 'python-data': 108, 'python-crawler': 109,
+    'mysql-basic': 110, 'mysql-advanced': 120,
+    'redis-cache': 121, 'redis-lock': 122,
+    'vue-basic': 112, 'vue-advanced': 113,
+    'pytorch-basic': 117, 'pytorch-advanced': 123,
+    'git-basic': 114, 'git-advanced': 124,
+    'linux-basic': 115, 'linux-shell': 125,
+    'bootstrap-basic': 116, 'bootstrap-advanced': 126,
+    'agent-dify': 118, 'agent-andrew': 119
+  };
+
   // 课程ID到锚点的映射
   var courseAnchors = {
-    'html-basic': 'html',
-    'html-advanced': 'html',
-    'css-basic': 'css',
-    'css-advanced': 'css',
+    'html-basic': 'html', 'html-advanced': 'html',
+    'css-basic': 'css', 'css-advanced': 'css',
     'javascript-basic': 'javascript',
-    'java-basic': 'java',
-    'java-advanced': 'java',
-    'python-basic': 'python',
-    'python-data': 'python',
-    'python-crawler': 'python',
-    'mysql-basic': 'mysql',
-    'mysql-advanced': 'mysql',
-    'redis-cache': 'redis',
-    'redis-lock': 'redis',
-    'vue-basic': 'vue',
-    'vue-advanced': 'vue',
-    'pytorch-basic': 'pytorch',
-    'pytorch-advanced': 'pytorch',
-    'git-basic': 'git',
-    'git-advanced': 'git',
-    'linux-basic': 'linux',
-    'linux-shell': 'linux',
-    'bootstrap-basic': 'bootstrap',
-    'bootstrap-advanced': 'bootstrap',
-    'agent-dify': 'agent',
-    'agent-andrew': 'agent'
+    'java-basic': 'java', 'java-advanced': 'java',
+    'python-basic': 'python', 'python-data': 'python', 'python-crawler': 'python',
+    'mysql-basic': 'mysql', 'mysql-advanced': 'mysql',
+    'redis-cache': 'redis', 'redis-lock': 'redis',
+    'vue-basic': 'vue', 'vue-advanced': 'vue',
+    'pytorch-basic': 'pytorch', 'pytorch-advanced': 'pytorch',
+    'git-basic': 'git', 'git-advanced': 'git',
+    'linux-basic': 'linux', 'linux-shell': 'linux',
+    'bootstrap-basic': 'bootstrap', 'bootstrap-advanced': 'bootstrap',
+    'agent-dify': 'agent', 'agent-andrew': 'agent'
   };
 
   var HEADER_OFFSET = 60;
+  var currentFavorites = [];
 
   function getFavorites() {
     try {
@@ -275,9 +280,55 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
   }
 
+  // 从后端加载收藏
+  function loadFavoritesFromServer() {
+    if (!isLoggedIn()) {
+      currentFavorites = getFavorites();
+      updateFavoritesBar();
+      syncFavoriteButtons();
+      return;
+    }
+    apiGet('/api/favorite/list').then(function(res) {
+      if (res.code === 200 && res.data) {
+        // 从服务器返回的收藏，转换为本地课程ID
+        var serverFavNames = res.data.map(function(f) { return f.courseName; });
+        currentFavorites = [];
+        for (var localId in courseNames) {
+          if (serverFavNames.indexOf(courseNames[localId]) !== -1) {
+            currentFavorites.push(localId);
+          }
+        }
+        // 同步到 localStorage
+        saveFavorites(currentFavorites);
+      }
+      updateFavoritesBar();
+      syncFavoriteButtons();
+    }).catch(function() {
+      currentFavorites = getFavorites();
+      updateFavoritesBar();
+      syncFavoriteButtons();
+    });
+  }
+
+  function syncFavoriteButtons() {
+    var buttons = document.querySelectorAll('.favorite-btn');
+    buttons.forEach(function(btn) {
+      var li = btn.closest('[data-course-id]');
+      if (!li) return;
+      var courseId = li.getAttribute('data-course-id');
+      if (currentFavorites.indexOf(courseId) !== -1) {
+        btn.classList.add('active');
+        btn.textContent = '❤';
+      } else {
+        btn.classList.remove('active');
+        btn.textContent = '♡';
+      }
+    });
+  }
+
   // 更新收藏课程栏
   function updateFavoritesBar() {
-    var favorites = getFavorites();
+    var favorites = currentFavorites;
     favoritesList.innerHTML = '';
     if (favorites.length === 0) {
       var emptyTip = document.createElement('li');
@@ -301,7 +352,6 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         });
         tag.appendChild(a);
-        // 添加删除按钮
         var removeBtn = document.createElement('button');
         removeBtn.className = 'fav-remove';
         removeBtn.textContent = '×';
@@ -321,20 +371,14 @@ document.addEventListener('DOMContentLoaded', function () {
   function flyToBar(btn, courseId) {
     var btnRect = btn.getBoundingClientRect();
     var barRect = favoritesList.getBoundingClientRect();
-
-    // 创建飞行粒子
     var particle = document.createElement('div');
     particle.className = 'fly-particle';
     particle.textContent = '❤';
     particle.style.left = btnRect.left + btnRect.width / 2 - 12 + 'px';
     particle.style.top = btnRect.top + btnRect.height / 2 - 12 + 'px';
     document.body.appendChild(particle);
-
-    // 计算目标位置
     var targetX = barRect.left + barRect.width / 2;
     var targetY = barRect.top + barRect.height / 2;
-
-    // 使用 GSAP 动画
     gsap.to(particle, {
       x: targetX - btnRect.left - 12,
       y: targetY - btnRect.top - 12,
@@ -344,103 +388,147 @@ document.addEventListener('DOMContentLoaded', function () {
       ease: 'power2.in',
       onComplete: function() {
         particle.remove();
-        // 更新收藏栏
         updateFavoritesBar();
       }
     });
   }
 
-  // 显示提示
   function showToast(msg) {
     var toast = document.createElement('div');
     toast.className = 'fav-toast';
     toast.textContent = msg;
     document.body.appendChild(toast);
-    setTimeout(function() {
-      toast.remove();
-    }, 1000);
+    setTimeout(function() { toast.remove(); }, 1000);
   }
 
   // 从收藏栏取消收藏
   function removeFavorite(courseId) {
-    var favorites = getFavorites();
-    var index = favorites.indexOf(courseId);
-    if (index !== -1) {
-      favorites.splice(index, 1);
-      saveFavorites(favorites);
-      // 更新课程卡片上的爱心状态
-      var card = document.querySelector('[data-course-id="' + courseId + '"] .favorite-btn');
-      if (card) {
-        card.classList.remove('active');
-        card.textContent = '♡';
-      }
-      // 移除标签动画
-      var tag = favoritesList.querySelector('[data-course-id="' + courseId + '"]');
-      if (tag) {
-        tag.style.animation = 'favTagOut 0.3s ease forwards';
-        setTimeout(function() {
+    var dbId = courseIdMap[courseId];
+    if (isLoggedIn() && dbId) {
+      apiDelete('/api/favorite/' + dbId).then(function(res) {
+        if (res.code === 200) {
+          var idx = currentFavorites.indexOf(courseId);
+          if (idx !== -1) currentFavorites.splice(idx, 1);
+          saveFavorites(currentFavorites);
+          syncFavoriteButtons();
+          var tag = favoritesList.querySelector('[data-course-id="' + courseId + '"]');
+          if (tag) {
+            tag.style.animation = 'favTagOut 0.3s ease forwards';
+            setTimeout(function() { updateFavoritesBar(); }, 300);
+          } else {
+            updateFavoritesBar();
+          }
+          showToast('取消收藏成功');
+        }
+      });
+    } else {
+      var idx = currentFavorites.indexOf(courseId);
+      if (idx !== -1) {
+        currentFavorites.splice(idx, 1);
+        saveFavorites(currentFavorites);
+        syncFavoriteButtons();
+        var tag = favoritesList.querySelector('[data-course-id="' + courseId + '"]');
+        if (tag) {
+          tag.style.animation = 'favTagOut 0.3s ease forwards';
+          setTimeout(function() { updateFavoritesBar(); }, 300);
+        } else {
           updateFavoritesBar();
-        }, 300);
-      } else {
-        updateFavoritesBar();
+        }
+        showToast('取消收藏成功');
       }
-      showToast('取消收藏成功');
     }
   }
 
   function toggleFavorite(courseId, btn) {
-    var favorites = getFavorites();
-    var index = favorites.indexOf(courseId);
+    var index = currentFavorites.indexOf(courseId);
+    var dbId = courseIdMap[courseId];
+    console.log('toggleFavorite:', courseId, 'dbId:', dbId, 'isLoggedIn:', isLoggedIn());
+
     if (index === -1) {
       // 添加收藏
-      favorites.push(courseId);
-      btn.classList.add('active');
-      btn.textContent = '❤';
-      saveFavorites(favorites);
-      // 播放飞行动画
-      flyToBar(btn, courseId);
-      showToast('收藏成功');
+      if (isLoggedIn() && dbId) {
+        console.log('调用API添加收藏, courseId:', dbId);
+        apiPost('/api/favorite', { courseId: dbId }).then(function(res) {
+          console.log('收藏API返回:', res);
+          if (res.code === 200) {
+            currentFavorites.push(courseId);
+            saveFavorites(currentFavorites);
+            btn.classList.add('active');
+            btn.textContent = '❤';
+            flyToBar(btn, courseId);
+            showToast('收藏成功');
+          } else {
+            console.error('收藏失败:', res.msg);
+            showToast(res.msg || '收藏失败');
+          }
+        }).catch(function(err) {
+          console.error('收藏API错误:', err);
+          showToast('收藏请求失败');
+        });
+      } else {
+        currentFavorites.push(courseId);
+        saveFavorites(currentFavorites);
+        btn.classList.add('active');
+        btn.textContent = '❤';
+        flyToBar(btn, courseId);
+        showToast('收藏成功');
+      }
     } else {
       // 取消收藏
-      favorites.splice(index, 1);
-      btn.classList.remove('active');
-      btn.textContent = '♡';
-      saveFavorites(favorites);
-      // 移除标签动画
-      var tag = favoritesList.querySelector('[data-course-id="' + courseId + '"]');
-      if (tag) {
-        tag.style.animation = 'favTagOut 0.3s ease forwards';
-        setTimeout(function() {
-          updateFavoritesBar();
-        }, 300);
+      if (isLoggedIn() && dbId) {
+        apiDelete('/api/favorite/' + dbId).then(function(res) {
+          if (res.code === 200) {
+            currentFavorites.splice(index, 1);
+            saveFavorites(currentFavorites);
+            btn.classList.remove('active');
+            btn.textContent = '♡';
+            var tag = favoritesList.querySelector('[data-course-id="' + courseId + '"]');
+            if (tag) {
+              tag.style.animation = 'favTagOut 0.3s ease forwards';
+              setTimeout(function() { updateFavoritesBar(); }, 300);
+            } else {
+              updateFavoritesBar();
+            }
+            showToast('取消收藏成功');
+          }
+        });
       } else {
-        updateFavoritesBar();
+        currentFavorites.splice(index, 1);
+        saveFavorites(currentFavorites);
+        btn.classList.remove('active');
+        btn.textContent = '♡';
+        var tag = favoritesList.querySelector('[data-course-id="' + courseId + '"]');
+        if (tag) {
+          tag.style.animation = 'favTagOut 0.3s ease forwards';
+          setTimeout(function() { updateFavoritesBar(); }, 300);
+        } else {
+          updateFavoritesBar();
+        }
+        showToast('取消收藏成功');
       }
-      showToast('取消收藏成功');
     }
   }
 
   function initFavorites() {
-    var favorites = getFavorites();
     var buttons = document.querySelectorAll('.favorite-btn');
     buttons.forEach(function(btn) {
       var li = btn.closest('[data-course-id]');
       if (!li) return;
       var courseId = li.getAttribute('data-course-id');
-      if (favorites.indexOf(courseId) !== -1) {
-        btn.classList.add('active');
-        btn.textContent = '❤';
-      }
       btn.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         toggleFavorite(courseId, btn);
       });
     });
-    // 初始化收藏栏
-    updateFavoritesBar();
+    loadFavoritesFromServer();
   }
 
   initFavorites();
+
+  // 暴露到全局供登录后调用
+  window.initFavorites = initFavorites;
+  window.loadFavoritesFromServer = loadFavoritesFromServer;
+  window.showToast = showToast;
 
 });
