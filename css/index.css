@@ -58,6 +58,10 @@
   color: var(--color-text);
 }
 
+[data-theme="dark"] .header h1 img {
+  filter: none;
+}
+
 /* --- Reset & Base --- */
 *,
 *::before,
@@ -226,6 +230,7 @@ button {
   height: 42px;
   width: auto;
   transition: height 0.35s ease;
+  filter: brightness(0);
 }
 
 .header.compact h1 img {
@@ -420,30 +425,6 @@ button {
   display: flex;
   gap: 20px;
   position: relative;
-}
-
-.banner-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.banner-title {
-  font-size: 48px;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 12px;
-  letter-spacing: -0.02em;
-}
-
-.banner-subtitle {
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 400;
 }
 
 /* 左侧课程分类 */

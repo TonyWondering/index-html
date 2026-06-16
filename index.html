@@ -6,6 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>码上成长</title>
   <link rel="stylesheet" type="text/css" href="./css/index.css" />
+  <link rel="stylesheet" type="text/css" href="./css/text-type.css" />
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="./js/api.js"></script>
 </head>
 
@@ -130,9 +136,7 @@
   <!-- 轮播图banner -->
   <div class="banner">
     <div class="wrapper" style="position: relative; z-index: 1;">
-      <div class="banner-center">
-        <h2 class="banner-title">码上成长</h2>
-        <p class="banner-subtitle">系统学习编程，从入门到精通</p>
+      <div id="banner-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; text-align: center; pointer-events: none;">
       </div>
       <div class="right">
         <h2>我的课程表</h2>
@@ -579,6 +583,211 @@
   </div><!-- /.main-content -->
 
   <script src="./js/main.js"></script>
+  <script type="text/babel">
+    const TextType = ({
+      text,
+      as: Component = 'div',
+      typingSpeed = 50,
+      initialDelay = 0,
+      pauseDuration = 2000,
+      deletingSpeed = 30,
+      loop = true,
+      className = '',
+      showCursor = true,
+      hideCursorWhileTyping = false,
+      cursorCharacter = '|',
+      cursorClassName = '',
+      cursorBlinkDuration = 0.5,
+      textColors = [],
+      variableSpeed,
+      onSentenceComplete,
+      startOnVisible = false,
+      reverseMode = false,
+      ...props
+    }) => {
+      const [displayedText, setDisplayedText] = React.useState('');
+      const [currentCharIndex, setCurrentCharIndex] = React.useState(0);
+      const [isDeleting, setIsDeleting] = React.useState(false);
+      const [currentTextIndex, setCurrentTextIndex] = React.useState(0);
+      const [isVisible, setIsVisible] = React.useState(!startOnVisible);
+      const cursorRef = React.useRef(null);
+      const containerRef = React.useRef(null);
+
+      const textArray = React.useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
+
+      const getRandomSpeed = React.useCallback(() => {
+        if (!variableSpeed) return typingSpeed;
+        const { min, max } = variableSpeed;
+        return Math.random() * (max - min) + min;
+      }, [variableSpeed, typingSpeed]);
+
+      const getCurrentTextColor = () => {
+        if (textColors.length === 0) return 'inherit';
+        return textColors[currentTextIndex % textColors.length];
+      };
+
+      React.useEffect(() => {
+        if (!startOnVisible || !containerRef.current) return;
+
+        const observer = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                setIsVisible(true);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        observer.observe(containerRef.current);
+        return () => observer.disconnect();
+      }, [startOnVisible]);
+
+      React.useEffect(() => {
+        if (showCursor && cursorRef.current) {
+          gsap.set(cursorRef.current, { opacity: 1 });
+          gsap.to(cursorRef.current, {
+            opacity: 0,
+            duration: cursorBlinkDuration,
+            repeat: -1,
+            yoyo: true,
+            ease: 'power2.inOut'
+          });
+        }
+      }, [showCursor, cursorBlinkDuration]);
+
+      React.useEffect(() => {
+        if (!isVisible) return;
+
+        let timeout;
+        const currentText = textArray[currentTextIndex];
+        const processedText = reverseMode ? currentText.split('').reverse().join('') : currentText;
+
+        const executeTypingAnimation = () => {
+          if (isDeleting) {
+            if (displayedText === '') {
+              setIsDeleting(false);
+              if (currentTextIndex === textArray.length - 1 && !loop) {
+                return;
+              }
+
+              if (onSentenceComplete) {
+                onSentenceComplete(textArray[currentTextIndex], currentTextIndex);
+              }
+
+              setCurrentTextIndex(prev => (prev + 1) % textArray.length);
+              setCurrentCharIndex(0);
+              timeout = setTimeout(() => { }, pauseDuration);
+            } else {
+              timeout = setTimeout(() => {
+                setDisplayedText(prev => prev.slice(0, -1));
+              }, deletingSpeed);
+            }
+          } else {
+            if (currentCharIndex < processedText.length) {
+              timeout = setTimeout(
+                () => {
+                  setDisplayedText(prev => prev + processedText[currentCharIndex]);
+                  setCurrentCharIndex(prev => prev + 1);
+                },
+                variableSpeed ? getRandomSpeed() : typingSpeed
+              );
+            } else if (textArray.length >= 1) {
+              if (!loop && currentTextIndex === textArray.length - 1) return;
+              timeout = setTimeout(() => {
+                setIsDeleting(true);
+              }, pauseDuration);
+            }
+          }
+        };
+
+        if (currentCharIndex === 0 && !isDeleting && displayedText === '') {
+          timeout = setTimeout(executeTypingAnimation, initialDelay);
+        } else {
+          executeTypingAnimation();
+        }
+
+        return () => clearTimeout(timeout);
+      }, [
+        currentCharIndex,
+        displayedText,
+        isDeleting,
+        typingSpeed,
+        deletingSpeed,
+        pauseDuration,
+        textArray,
+        currentTextIndex,
+        loop,
+        initialDelay,
+        isVisible,
+        reverseMode,
+        variableSpeed,
+        onSentenceComplete
+      ]);
+
+      const shouldHideCursor =
+        hideCursorWhileTyping && (currentCharIndex < textArray[currentTextIndex].length || isDeleting);
+
+      return React.createElement(
+        Component,
+        {
+          ref: containerRef,
+          className: `text-type ${className}`,
+          ...props
+        },
+        React.createElement('span', { className: 'text-type__content', style: { color: getCurrentTextColor() || 'inherit' } }, displayedText),
+        showCursor && React.createElement(
+          'span',
+          {
+            ref: cursorRef,
+            className: `text-type__cursor ${cursorClassName} ${shouldHideCursor ? 'text-type__cursor--hidden' : ''}`
+          },
+          cursorCharacter
+        )
+      );
+    };
+  </script>
+  <script type="text/babel">
+    // 渲染TextType组件到banner中央
+    const bannerCenter = document.getElementById('banner-center');
+    if (bannerCenter) {
+      ReactDOM.createRoot(bannerCenter).render(
+        React.createElement(TextType, {
+          text: ["欢迎来到码上成长", "学习编程", "掌握技术", "工具下载"],
+          typingSpeed: 100,
+          pauseDuration: 2000,
+          showCursor: true,
+          cursorCharacter: "|",
+          style: { fontSize: '48px', fontWeight: 'bold', color: 'white', letterSpacing: '-0.02em' }
+        })
+      );
+    }
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      gsap.registerPlugin(ScrollTrigger);
+      const boxes = document.querySelectorAll('.box');
+      boxes.forEach(box => {
+        const cards = box.querySelectorAll('.content ul li');
+        cards.forEach((card, index) => {
+          gsap.from(card, {
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 85%',
+              toggleActions: 'play none none none'
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.6,
+            delay: index * 0.1,
+            ease: 'power2.out',
+            clearProps: "all"
+          });
+        });
+      });
+    });
+  </script>
 
   <!-- Dify AI 助手 -->
   <script>
