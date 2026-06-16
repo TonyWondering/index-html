@@ -178,7 +178,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // ========== 返回顶部按钮 ==========
   var backBtn = document.createElement('button');
   backBtn.className = 'back-to-top';
-  backBtn.innerHTML = '&#8593;';
   backBtn.setAttribute('aria-label', '返回顶部');
   backBtn.setAttribute('title', '跳转到顶部');
   document.body.appendChild(backBtn);

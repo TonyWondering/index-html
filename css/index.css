@@ -1052,15 +1052,15 @@ button {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  width: 44px;
-  height: 44px;
-  background: var(--color-primary);
+  width: 48px;
+  height: 48px;
+  background: #18181b;
   color: #fff;
   border: none;
   border-radius: 50%;
-  font-size: 18px;
+  font-size: 0;
   cursor: pointer;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
@@ -1071,6 +1071,17 @@ button {
   justify-content: center;
 }
 
+.back-to-top::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid #fff;
+  border-bottom: none;
+  border-right: none;
+  transform: rotate(45deg);
+  margin-top: 4px;
+}
+
 .back-to-top.visible {
   opacity: 1;
   visibility: visible;
@@ -1078,7 +1089,7 @@ button {
 }
 
 .back-to-top:hover {
-  background: var(--color-primary-dark);
+  background: #27272a;
   transform: translateY(-2px);
 }
 
