@@ -1264,6 +1264,25 @@ button {
 }
 
 /* ========== 登录/注册弹窗 ========== */
+
+/* ========== ScrollFloat 滚动文字动画 ========== */
+.scroll-float {
+  overflow: hidden;
+}
+
+.scroll-float-text {
+  display: inline-block;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.char {
+  display: inline-block;
+}
+
+/* ========== 登录/注册弹窗 ========== */
 .auth-modal {
   position: fixed;
   inset: 0;
