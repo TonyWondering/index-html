@@ -366,7 +366,7 @@ button {
 }
 
 .header .search input {
-  width: 280px;
+  width: 200px;
   padding: 8px 14px;
   border: none;
   background: transparent;
@@ -738,8 +738,8 @@ button {
 }
 
 .box .content ul li:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
 .box .content ul li a img {
