@@ -724,6 +724,11 @@ button {
   grid-template-columns: repeat(3, 280px);
 }
 
+/* Agent课程三列布局 */
+#agent .content ul {
+  grid-template-columns: repeat(3, 280px);
+}
+
 .box .content ul li {
   background: var(--color-bg-white);
   border-radius: var(--radius-md);

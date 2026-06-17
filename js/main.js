@@ -227,7 +227,19 @@ document.addEventListener('DOMContentLoaded', function () {
     'bootstrap-basic': 'Bootstrap 5 响应式布局',
     'bootstrap-advanced': 'Bootstrap 组件实战',
     'agent-dify': '基于dify的Agent开发',
-    'agent-andrew': '吴恩达讲Agent'
+    'agent-andrew': '吴恩达讲Agent',
+    'agent-rag': 'RAG与Agent智能体项目实战',
+    'springboot-basic': 'Spring Boot 零基础入门',
+    'springboot-advanced': 'Spring Boot 项目实战',
+    'mybatis-basic': 'MyBatis 基础教程',
+    'mybatis-advanced': 'MyBatis-Plus 进阶实战',
+    'typescript-basic': 'TypeScript 基础教程',
+    'elementplus-basic': 'Element Plus 组件库实战',
+    'deeplearning-transformer': 'Transformer/CNN/LSTM 经典模型实战',
+    'deeplearning-llm': '大模型API调用实战',
+    'python-data-analysis': 'Python 数据分析（NumPy/Pandas/Matplotlib）',
+    'python-sklearn': 'Sklearn 机器学习入门',
+    'python-ml-lihongyi': '李宏毅机器学习课程'
   };
 
   // 课程ID到数据库ID的映射
@@ -244,7 +256,13 @@ document.addEventListener('DOMContentLoaded', function () {
     'git-basic': 114, 'git-advanced': 124,
     'linux-basic': 115, 'linux-shell': 125,
     'bootstrap-basic': 116, 'bootstrap-advanced': 126,
-    'agent-dify': 118, 'agent-andrew': 119
+    'agent-dify': 118, 'agent-andrew': 119,
+    'agent-rag': 127,
+    'springboot-basic': 200, 'springboot-advanced': 201,
+    'mybatis-basic': 202, 'mybatis-advanced': 203,
+    'typescript-basic': 204, 'elementplus-basic': 205,
+    'deeplearning-transformer': 206, 'deeplearning-llm': 207,
+    'python-data-analysis': 208, 'python-sklearn': 209, 'python-ml-lihongyi': 210
   };
 
   // 课程ID到锚点的映射
@@ -261,7 +279,13 @@ document.addEventListener('DOMContentLoaded', function () {
     'git-basic': 'git', 'git-advanced': 'git',
     'linux-basic': 'linux', 'linux-shell': 'linux',
     'bootstrap-basic': 'bootstrap', 'bootstrap-advanced': 'bootstrap',
-    'agent-dify': 'agent', 'agent-andrew': 'agent'
+    'agent-dify': 'agent', 'agent-andrew': 'agent', 'agent-rag': 'agent',
+    'springboot-basic': 'springboot', 'springboot-advanced': 'springboot',
+    'mybatis-basic': 'mybatis', 'mybatis-advanced': 'mybatis',
+    'typescript-basic': 'typescript',
+    'elementplus-basic': 'elementplus',
+    'deeplearning-transformer': 'deeplearning', 'deeplearning-llm': 'deeplearning',
+    'python-data-analysis': 'python', 'python-sklearn': 'python', 'python-ml-lihongyi': 'python'
   };
 
   var HEADER_OFFSET = 60;
